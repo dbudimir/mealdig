@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [{ "src": "package.json", "use": "@now/next@2.3.9" }],
+  "build": {
+    "env": {
+      "api_key": "@api_key"
+    }
+  },
+  "routes": [{ "src": "/(.*)/", "status": 301, "headers": { "Location": "/$1" } }]
+}
