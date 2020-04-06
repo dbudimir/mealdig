@@ -38,20 +38,8 @@ export default class MyDocument extends Document<Props> {
           <link rel="apple-touch-icon" href="/static/touch-icon.png" />
           <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />
           <link rel="icon" href="/static/favicon.png" />
-          <link
-            rel="preload"
-            as="font"
-            href="/static/fonts/Nunito/nunito-v12-latin-800.woff2"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            as="font"
-            href="/static/fonts/Roboto/roboto-v20-latin-300.woff2"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
+          <link rel="preload" as="font" href="/static/fonts/Nunito/nunito-v12-latin-800.woff2" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" as="font" href="/static/fonts/Roboto/roboto-v20-latin-300.woff2" type="font/woff2" crossOrigin="anonymous" />
           <style
             dangerouslySetInnerHTML={{
               __html: `
@@ -179,10 +167,7 @@ export default class MyDocument extends Document<Props> {
 				 `
             }}
           />
-          <meta
-            name="google-site-verification"
-            content="0tikEBJv6jfDzlVrMSFJmAOFrQCMM0c47FLBfIyeck4"
-          />
+          <meta name="google-site-verification" content="0tikEBJv6jfDzlVrMSFJmAOFrQCMM0c47FLBfIyeck4" />
 
           {/* Step 5: Output the styles in the head  */}
           {styleTags}

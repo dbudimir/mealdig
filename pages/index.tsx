@@ -1,14 +1,12 @@
 import { NextPage } from 'next';
-import classes from './style.module.scss';
+// import classes from '../styles/style.module.scss';
 
-import Layout from '../components/Layout';
+import Layout from '../components/sitewide/Layout';
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
   <>
     <Layout />
-    <div className={classes.Home}>
       <h1>Hello world! - user agent: {userAgent}</h1>
-    </div>
   </>
 );
 
