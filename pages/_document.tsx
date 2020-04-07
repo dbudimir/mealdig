@@ -1,6 +1,6 @@
-import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import React from "react";
+import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 interface Props {
   styleTags: object;
@@ -15,7 +15,9 @@ export default class MyDocument extends Document<Props> {
     const sheet = new ServerStyleSheet();
 
     // Step 2: Retrieve styles from components in the page
-    const page = renderPage((App: any) => (props: any) => sheet.collectStyles(<App {...props} />));
+    const page = renderPage((App: any) => (props: any) =>
+      sheet.collectStyles(<App {...props} />)
+    );
 
     // Step 3: Extract the styles as <style> tags
     const styleTags = sheet.getStyleElement();
@@ -36,10 +38,26 @@ export default class MyDocument extends Document<Props> {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" sizes="192x192" href="/static/touch-icon.png" />
           <link rel="apple-touch-icon" href="/static/touch-icon.png" />
-          <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />
+          <link
+            rel="mask-icon"
+            href="/static/favicon-mask.svg"
+            color="#49B882"
+          />
           <link rel="icon" href="/static/favicon.png" />
-          <link rel="preload" as="font" href="/static/fonts/Nunito/nunito-v12-latin-800.woff2" type="font/woff2" crossOrigin="anonymous" />
-          <link rel="preload" as="font" href="/static/fonts/Roboto/roboto-v20-latin-300.woff2" type="font/woff2" crossOrigin="anonymous" />
+          <link
+            rel="preload"
+            as="font"
+            href="/static/fonts/Nunito/nunito-v12-latin-800.woff2"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            as="font"
+            href="/static/fonts/Roboto/roboto-v20-latin-300.woff2"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
           <style
             dangerouslySetInnerHTML={{
               __html: `
@@ -164,10 +182,13 @@ export default class MyDocument extends Document<Props> {
 						margin: 0;
 						background: #eeeef1;
 					}
-				 `
+				 `,
             }}
           />
-          <meta name="google-site-verification" content="0tikEBJv6jfDzlVrMSFJmAOFrQCMM0c47FLBfIyeck4" />
+          <meta
+            name="google-site-verification"
+            content="0tikEBJv6jfDzlVrMSFJmAOFrQCMM0c47FLBfIyeck4"
+          />
 
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
