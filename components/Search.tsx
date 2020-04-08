@@ -28,7 +28,7 @@ interface ErrorMessage {
 interface State {
   selectedChain: string | boolean;
   userInput: any;
-  filteredSuggestions: string[];
+  filteredSuggestions: any;
   activeSuggestion: number;
   showSuggestions: boolean;
   errorMessages: ErrorMessage;
@@ -82,11 +82,14 @@ export default class Search extends Component<Props, State> {
   // Event fired when the input value is changed
   searchTextInput = (e: any) => {
     const { suggestions } = this.props;
+    const cleanSuggestons = suggestions.map((suggestion: any) => {
+      return suggestion.replace('-', ' ');
+    });
     const userInput = e.currentTarget.value;
 
     // Filter our suggestions that don't contain the user's input
-    const filteredSuggestions = suggestions.filter(
-      (suggestion) => suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+    const filteredSuggestions = cleanSuggestons.filter(
+      (suggestion: any) => suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
 
     // Update the user input and filtered suggestions, reset the active
@@ -116,11 +119,12 @@ export default class Search extends Component<Props, State> {
 
     // User pressed the enter key, update the input and close the suggestions
     else if (e.keyCode === 13) {
+      let tagSlug = filteredSuggestions[activeSuggestion].replace(/ /g, '-');
       this.setState(
         {
           activeSuggestion: 0,
           showSuggestions: false,
-          userInput: filteredSuggestions[activeSuggestion]
+          userInput: tagSlug
         },
         () => this.runSearch()
       );
@@ -136,7 +140,6 @@ export default class Search extends Component<Props, State> {
 
     // User pressed the down arrow, increment the index
     else if (e.keyCode === 40) {
-      console.log(`${activeSuggestion + 1} and ${filteredSuggestions.length}`);
       if (activeSuggestion + 1 === filteredSuggestions.length) {
         return;
       }
@@ -166,7 +169,7 @@ export default class Search extends Component<Props, State> {
       if (filteredSuggestions.length) {
         suggestionsListComponent = (
           <ul className="suggestions">
-            {filteredSuggestions.map((suggestion, index) => {
+            {filteredSuggestions.map((suggestion: any, index: number) => {
               let className;
               // Flag the active suggestion with a class
               if (index === activeSuggestion) {

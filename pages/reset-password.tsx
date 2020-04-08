@@ -15,7 +15,7 @@ interface Props {
   setUser: Function;
 }
 
-const ResetPassword = ({ setUser = () => {} }, props: Props) => {
+const ResetPassword: React.FC<Props> = ({ setUser = () => {} }, props: Props) => {
   const userStatus: any | undefined = useContext(UserContext);
 
   return (

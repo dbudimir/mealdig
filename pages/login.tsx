@@ -13,8 +13,7 @@ const PageContainer = styled.div`
 interface Props {
   setUser: Function;
 }
-
-const Login = ({ setUser = () => {} }, props: Props) => {
+const Login: React.FC<Props> = ({ setUser = () => {} }, props: Props) => {
   const userStatus: any = useContext(UserContext);
 
   return (

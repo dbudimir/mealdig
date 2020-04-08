@@ -16,7 +16,7 @@ interface Props {
   setUser: Function;
 }
 
-const SignUp = ({ setUser = () => {} }, props: Props) => {
+const SignUp: React.FC<Props> = ({ setUser = () => {} }, props: Props) => {
   const userStatus: any = useContext(UserContext);
 
   return (

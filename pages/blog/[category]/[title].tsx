@@ -34,9 +34,6 @@ export default class BlogPost extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.state);
-    //  const { data } = this.state;
-
     return (
       <div>
         <NextSeo
@@ -61,7 +58,6 @@ export default class BlogPost extends Component<Props, State> {
 
 // Serverside get props
 export async function getServerSideProps(context: any) {
-  console.log(context.query);
   const postSlug = context.query.title;
 
   const res = await fetch(`https://mealdig.blog/wp-json/wp/v2/posts?slug=${postSlug}`);

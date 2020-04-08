@@ -58,7 +58,6 @@ export default class User extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.props);
     const { orders, fullName } = this.props;
     const orderCard = orders.map((order: any, index: number) => <OrderContent orderID={order._id} key={index} />);
 

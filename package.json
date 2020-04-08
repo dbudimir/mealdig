@@ -62,7 +62,7 @@
   "name": "mealdig",
   "scripts": {
     "build": "next build",
-    "build-sitemap": "node node_modules/.bin/buildSitemap.js",
+    "build-sitemap": "node ./utils/build-sitemap.js",
     "dev": "next -p 4000",
     "dev-now": "now dev",
     "get-tags": "node -e 'require(\"./utils/tag-store.js\").getTags()'",

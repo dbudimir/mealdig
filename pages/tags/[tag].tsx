@@ -46,7 +46,6 @@ export default class Tag extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.state);
     const { orders, _id, tag } = this.state;
     const orderCard = orders.map((order: any, index: number) => <OrderContent orderID={order._id} key={index} />);
 
