@@ -3,10 +3,9 @@
 
 // Utilities
 import React, { Component } from 'react';
-import Link from 'next/link';
 
 // Styles
-import NavBar from '../../../styles/Nav';
+import NavBar from '../../../styles/NavBar';
 
 // Components
 import LoggedInNav from './LoggedInNav';
@@ -18,8 +17,6 @@ interface Props {
 
 interface State {
   navItems: JSX.Element[] | JSX.Element | undefined;
-  style: any;
-  imgStyle: Object;
 }
 
 export default class Nav extends Component<Props, State> {
@@ -27,13 +24,7 @@ export default class Nav extends Component<Props, State> {
     super(props);
     this.state = {
       ...props,
-      navItems: <LoggedOutNav />,
-      style: {
-        display: ``
-      },
-      imgStyle: {
-        filter: `hue-rotate(${Math.floor(Math.random() * (180 - 0 + 1)) + 0}deg)`
-      }
+      navItems: <LoggedOutNav />
     };
   }
 
@@ -54,74 +45,9 @@ export default class Nav extends Component<Props, State> {
     });
   };
 
-  openMobileMenu = () => {
-	 const { display } = this.state.style;
-    const displayValue = display === 'none' ? 'block' : 'none';
-    this.setState({
-      style: { display: displayValue }
-    });
-  };
-
   render() {
     const { state } = this;
 
-    return (
-      <NavBar>
-        <div className="nav-left">
-          <div className="left-nav-icon" />
-          <Link
-            href={{
-              pathname: '/'
-            }}
-            as={{ pathname: '/' }}
-          >
-            <a>
-              <h1>MEALdig</h1>
-            </a>
-          </Link>
-          <div className="right-nav-icon" role="menuitem" onClick={this.openMobileMenu}>
-            <img src="https://mealdig.com/static/hamburger-icon.png" style={state.imgStyle} alt="Menu Icon" />
-          </div>
-        </div>
-
-        <div className="menu-container" style={state.style}>
-          <div className="menu">
-            <Link
-              href={{
-                pathname: '/'
-              }}
-            >
-              <a>
-                <span>Chains</span>
-              </a>
-            </Link>
-            <Link
-              href={{
-                pathname: '/orders/all'
-              }}
-              as={{ pathname: `/orders/all` }}
-            >
-              <a>
-                <span>Orders</span>
-              </a>
-            </Link>
-            {state.navItems}
-            <Link
-              href={{
-                pathname: '/create-order'
-              }}
-              as={{ pathname: `/create-order` }}
-            >
-              <a>
-                <span className="create">
-                  Create Order
-                  <img src="/static/plus.svg" alt="Plus Icon" />
-                </span>
-              </a>
-            </Link>
-          </div>
-        </div>
-		</NavBar>
-    );
+    return <NavBar>{state.navItems}</NavBar>;
   }
 }

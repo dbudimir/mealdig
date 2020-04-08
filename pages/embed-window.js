@@ -62,9 +62,7 @@ class EmbedWindow extends React.Component {
 
     return (
       <EmbedWindowContainer>
-        <span className="section-header">
-          Copy the code snippet below and paste it on your site
-        </span>
+        <span className="section-header">Copy the code snippet below and paste it on your site</span>
         <textarea value={html} />
         <span className="section-header">Preview</span>
         <InnerHTML html={html} />

@@ -99,7 +99,7 @@ export default class TagForm extends Component<Props, State> {
     const newArray: string[] = [];
     this.setState(
       () => {
-        tags.forEach((tag) => {
+        tags.forEach(tag => {
           newArray.push(tag.replace(/ /g, '-'));
         });
       },
@@ -122,7 +122,7 @@ export default class TagForm extends Component<Props, State> {
     const val = e.target.value.toLowerCase();
 
     if (e.key === 'Enter' && val) {
-      if (tags.find((tag) => tag.toLowerCase() === val.toLowerCase())) {
+      if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
         return;
       }
 

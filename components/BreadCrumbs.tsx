@@ -12,7 +12,7 @@ const size = {
 const BreadCrumbsContainer = styled.div`
   background-color: #9883e5;
   position: sticky;
-  top: 74px;
+  top: 54px;
   z-index: 10;
 
   .breadcrumbs-list {
@@ -79,7 +79,10 @@ export default class BreadCrumbs extends Component<Props, State> {
     } else {
       chainCrumb = (
         <>
-          <Link href={{ pathname: '/chains/[name]', query: { chainName: allOrders.name } }} as={{ pathname: `/chains/${allOrders.name}` }}>
+          <Link
+            href={{ pathname: '/chains/[name]', query: { chainName: allOrders.name } }}
+            as={{ pathname: `/chains/${allOrders.name}` }}
+          >
             <a href={`/chains/${allOrders.name}`}>{allOrders.name} </a>
           </Link>
           <span>→</span>

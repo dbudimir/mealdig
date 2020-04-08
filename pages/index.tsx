@@ -61,7 +61,7 @@ export async function getServerSideProps() {
 
   const chainsList = [data.orders, data2.orders];
 
-  const cleanList = chainsList.map((chain) =>
+  const cleanList = chainsList.map(chain =>
     chain.filter(
       (order: any) =>
         order.orderName !== null &&

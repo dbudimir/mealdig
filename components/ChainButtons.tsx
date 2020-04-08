@@ -75,7 +75,7 @@ export default class ChainButtons extends Component<Props, State> {
   render() {
     const { chainNames } = this.state;
 
-    const buttons = chainNames.map((chainName) => (
+    const buttons = chainNames.map(chainName => (
       <div className="chain-button">
         <ChainLogo chainName={chainName} />
       </div>

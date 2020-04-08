@@ -29,9 +29,7 @@ const Layout: React.FC = ({}) => {
 
   return (
     <GlobalLayout>
-      <div className="navbar">
-        <Nav signOut={signOut} />
-      </div>
+      <Nav signOut={signOut} />
       <Feedback updateFeedbackModal={updateFeedbackModal} />
     </GlobalLayout>
   );

@@ -7,5 +7,6 @@ module.exports = {
 		 'plugin:prettier/recommended',
 	],
 	plugins: ['@typescript-eslint', 'react'],
-	rules: {},
+	rules: {}
  };
+ 
