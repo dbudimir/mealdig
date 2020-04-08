@@ -1,19 +1,5 @@
 {
   "author": "",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "main": "index.js",
-  "name": "mealdig",
-  "scripts": {
-    "build-sitemap": "node node_modules/.bin/buildSitemap.js",
-    "get-tags": "node -e 'require(\"./utils/tag-store.js\").getTags()'",
-    "dev-now": "now dev",
-    "dev": "next -p 4000",
-    "pre-build": "npm run get-tags; npm run build-sitemap;",
-    "build": "next build",
-    "start": "next start"
-  },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@now/next": "^2.5.1",
@@ -49,17 +35,17 @@
     "unique-concat": "^0.2.2",
     "webpack": "^4.42.1"
   },
+  "description": "",
   "devDependencies": {
     "@types/node": "^13.9.8",
-    "@zeit/next-sass": "^1.0.1",
-    "typescript": "^3.8.3",
-    "eslint-config-wesbos": "^0.0.19",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "@zeit/next-sass": "^1.0.1",
     "babel-eslint": "^10.0.2",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-react-app": "^4.0.1",
+    "eslint-config-wesbos": "^0.0.19",
     "eslint-plugin-flowtype": "^2",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -67,7 +53,21 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.6.1",
     "prettier": "^1.18.2",
+    "typescript": "^3.8.3",
     "webpack": "^4.38.0"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "mealdig",
+  "scripts": {
+    "build": "next build",
+    "build-sitemap": "node node_modules/.bin/buildSitemap.js",
+    "dev": "next -p 4000",
+    "dev-now": "now dev",
+    "get-tags": "node -e 'require(\"./utils/tag-store.js\").getTags()'",
+    "pre-build": "npm run get-tags; npm run build-sitemap;",
+    "start": "next start"
   },
   "version": "1.0.0"
 }
