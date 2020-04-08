@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Form = styled.div`
@@ -13,23 +12,32 @@ const Form = styled.div`
   }
 `;
 
-class CreateChipotleOrder extends Component {
-  constructor() {
-    super();
+interface Props {
+  setOrder: Function;
+}
+interface State {
+  contentSchema: string;
+  chainName: string;
+  [key: string]: any;
+}
+
+export default class CreateChipotleOrder extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
       contentSchema: 'ChipotleOrder',
-      chainName: 'Chipotle',
+      chainName: 'Chipotle'
     };
   }
 
-  updateState = e => {
+  updateState = (e: any) => {
     const { target } = e;
     const { value } = target;
     const { name } = target;
 
     this.setState(
       {
-        [name]: value,
+        [name]: value
       },
       () => {
         const { setOrder } = this.props;
@@ -39,16 +47,12 @@ class CreateChipotleOrder extends Component {
   };
 
   getSelected = () => {
-    const selectedFillings = [].filter
-      .call(document.getElementsByName('filling'), c => c.checked)
-      .map(c => c.value);
-    const selectedToppings = [].filter
-      .call(document.getElementsByName('topping'), c => c.checked)
-      .map(c => c.value);
+    const selectedFillings = [].filter.call(document.getElementsByName('filling'), (c: any) => c.checked).map((c: any) => c.value);
+    const selectedToppings = [].filter.call(document.getElementsByName('topping'), (c: any) => c.checked).map((c: any) => c.value);
     this.setState(
       {
         fillings: selectedFillings,
-        toppings: selectedToppings,
+        toppings: selectedToppings
       },
       () => {
         const { setOrder } = this.props;
@@ -59,9 +63,9 @@ class CreateChipotleOrder extends Component {
 
   submitOrder = () => {
     this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
-        submitOrder: true,
+        submitOrder: true
       }),
       () => {
         const { setOrder } = this.props;
@@ -71,12 +75,9 @@ class CreateChipotleOrder extends Component {
   };
 
   render() {
-    CreateChipotleOrder.propTypes = {
-      setOrder: PropTypes.func,
-    };
-
     const { mealType } = this.state;
-    let tortilla = '';
+
+    let tortilla: any = '';
     if (mealType === 'Tacos') {
       tortilla = (
         <div>
@@ -239,5 +240,3 @@ class CreateChipotleOrder extends Component {
     );
   }
 }
-
-export default CreateChipotleOrder;

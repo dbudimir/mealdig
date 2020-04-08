@@ -1,6 +1,5 @@
 // Utilities
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // Style
 import styled from 'styled-components';
@@ -76,11 +75,20 @@ const TagInput = styled.div`
   }
 `;
 
-export default class TagForm extends Component {
-  constructor() {
-    super();
+interface Props {
+  setTags: Function;
+  tagInput?: any;
+}
+
+interface State {
+  tags: string[];
+}
+
+export default class TagForm extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
-      tags: [],
+      tags: []
     };
   }
 
@@ -88,10 +96,10 @@ export default class TagForm extends Component {
     const { tags } = this.state;
     const { setTags } = this.props;
 
-    const newArray = [];
+    const newArray: string[] = [];
     this.setState(
       () => {
-        tags.forEach(tag => {
+        tags.forEach((tag) => {
           newArray.push(tag.replace(/ /g, '-'));
         });
       },
@@ -101,7 +109,7 @@ export default class TagForm extends Component {
     );
   };
 
-  removeTag = i => {
+  removeTag = (i: any) => {
     const { tags } = this.state;
     const newTags = [...tags];
     newTags.splice(i, 1);
@@ -109,31 +117,30 @@ export default class TagForm extends Component {
     this.updateState();
   };
 
-  inputKeyUp = e => {
+  inputKeyUp = (e: any) => {
     const { tags } = this.state;
     const val = e.target.value.toLowerCase();
+
     if (e.key === 'Enter' && val) {
-      if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
+      if (tags.find((tag) => tag.toLowerCase() === val.toLowerCase())) {
         return;
       }
+
       this.setState({ tags: [...tags, val] }, () => {
         this.updateState();
       });
+      // Reset tag input field
+      e.preventDefault();
+      e.target.value = '';
 
-      this.tagInput.value = null;
+      // Delete last character of tag
     } else if (e.key === 'Backspace' && !val) {
       this.removeTag(tags.length - 1);
     }
   };
 
   render() {
-    TagForm.propTypes = {
-      setTags: PropTypes.func,
-    };
-
     const { tags } = this.state;
-
-    console.log(this.state);
 
     return (
       <TagInput>
@@ -153,14 +160,7 @@ export default class TagForm extends Component {
               </li>
             ))}
             <li className="tag-input">
-              <input
-                type="text"
-                placeholder="(ex. healthy, vegan, spicey)"
-                onKeyUp={this.inputKeyUp}
-                ref={c => {
-                  this.tagInput = c;
-                }}
-              />
+              <input type="text" placeholder="(ex. healthy, vegan, spicey)" onKeyUp={this.inputKeyUp} />
             </li>
           </ul>
         </div>

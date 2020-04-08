@@ -11,19 +11,19 @@ const PageContainer = styled.div`
   height: 100vh;
 `;
 
-function ResetPassword({ updateUser = () => {} }) {
-  const userStatus = useContext(UserContext);
+interface Props {
+  setUser: Function;
+}
 
-  ResetPassword.propTypes = {
-    updateUser: PropTypes.func,
-  };
+const ResetPassword = ({ setUser = () => {} }, props: Props) => {
+  const userStatus: any | undefined = useContext(UserContext);
 
   return (
     <PageContainer>
       <Layout />
-      <ResetPasswordForm signIn={userStatus.signIn} updateUser={updateUser} />
+      <ResetPasswordForm signIn={userStatus.signIn} setUser={setUser} />
     </PageContainer>
   );
-}
+};
 
 export default ResetPassword;

@@ -3,7 +3,7 @@
 
 // Utilities
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+
 import Router from 'next/router';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -117,42 +117,38 @@ const ModalOuter = styled.div`
   }
 `;
 
-export default function SubmitConfirmation(props) {
-  SubmitConfirmation.propTypes = {
-    orderState: PropTypes.object,
-    updateUser: PropTypes.func,
-    toggleSubmitConfirmation: PropTypes.func,
-  };
+interface Props {
+  orderState: any;
+  toggleSubmitConfirmation: Function;
+  setUser: Function;
+}
 
-  const { orderState, toggleSubmitConfirmation } = props;
-  const userStatus = useContext(UserContext);
+const SubmitConfirmation = (props: Props) => {
+  const { orderState, toggleSubmitConfirmation, setUser } = props;
+  const userStatus: any = useContext(UserContext);
 
-  const updateModal = (action) => {
+  const updateModal = (action: any) => {
     userStatus.switchNextAction(action);
   };
 
-  console.log(userStatus.switchNextAction);
-
-  const submitOrder = (event) => {
-    event.preventDefault();
+  const submitOrder = (e: any) => {
+    e.preventDefault();
     if (localStorage.length > 0) {
       const reqBody = { order: orderState.order, userId: localStorage.userId };
-      axios
-        .post(`${process.env.api_key}/api/user-order/create/existing-user`, { ...reqBody })
-        .then((response) => {
-          Router.push(`/user/${localStorage.username}`);
-        });
+      axios.post(`${process.env.api_key}/api/user-order/create/existing-user`, { ...reqBody }).then((response) => {
+        Router.push(`/user/${localStorage.username}`);
+      });
     } else if (localStorage.length === 0) {
       const reqBody = { order: orderState.order };
       axios
         .post(`${process.env.api_key}/api/user-order/create/order`, {
-          ...reqBody,
+          ...reqBody
         })
         .then((response) => {
           Router.push(
             {
               pathname: `/orders/${response.data._id}`,
-              query: { id: response.data._id },
+              query: { id: response.data._id }
             },
             `/orders/${response.data._id}`
           );
@@ -165,8 +161,7 @@ export default function SubmitConfirmation(props) {
     userLoggedIn = (
       <div>
         <p>
-          Create an account so you can save this order to your profile. Or submit anonymously to get
-          a shareable link.
+          Create an account so you can save this order to your profile. Or submit anonymously to get a shareable link.
         </p>
         <button onClick={() => updateModal('signup')} type="button">
           Create Account
@@ -200,11 +195,7 @@ export default function SubmitConfirmation(props) {
     case 'signup':
       nextAction = (
         <div className="modal-form">
-          <SignupForm
-            signIn={userStatus.signIn}
-            updateUser={props.updateUser}
-            updateAction={updateModal}
-          />
+          <SignupForm signIn={userStatus.signIn} setUser={setUser} updateAction={updateModal} />
           <span className="back-button" onClick={() => updateModal('')}>
             {'<< Close Signup'}
           </span>
@@ -214,11 +205,7 @@ export default function SubmitConfirmation(props) {
     case 'login':
       nextAction = (
         <div className="modal-form">
-          <LoginForm
-            signIn={userStatus.signIn}
-            updateUser={props.updateUser}
-            updateAction={updateModal}
-          />
+          <LoginForm signIn={userStatus.signIn} setUser={setUser} updateAction={updateModal} />
           <span className="back-button" onClick={() => updateModal('')}>
             {'<< Close Login'}
           </span>
@@ -236,7 +223,12 @@ export default function SubmitConfirmation(props) {
           <h3>Nice!</h3>
           {userLoggedIn}
           {nextAction}
-          <span className="back-button" onClick={toggleSubmitConfirmation}>
+          <span
+            className="back-button"
+            onClick={() => {
+              toggleSubmitConfirmation;
+            }}
+          >
             {'<< Go Back'}
           </span>
         </div>
@@ -244,4 +236,6 @@ export default function SubmitConfirmation(props) {
       </div>
     </ModalOuter>
   );
-}
+};
+
+export default SubmitConfirmation;

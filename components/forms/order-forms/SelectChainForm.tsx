@@ -1,29 +1,29 @@
 // Utilities
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-class SelectChainForm extends Component {
-  constructor(props) {
+interface Props {
+  setChain: Function;
+}
+interface State {}
+
+export default class SelectChainForm extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { ...props };
   }
 
-  updateState = e => {
+  updateState = (e: any) => {
     const { setChain } = this.props;
     const { target } = e;
     const { value } = target;
     const { name } = target;
     this.setState({
-      [name]: value,
+      [name]: value
     });
     setChain(e.target.value);
   };
 
   render() {
-    SelectChainForm.propTypes = {
-      setChain: PropTypes.func,
-    };
-
     return (
       <div className="select-chain">
         <form>
@@ -57,5 +57,3 @@ class SelectChainForm extends Component {
     );
   }
 }
-
-export default SelectChainForm;

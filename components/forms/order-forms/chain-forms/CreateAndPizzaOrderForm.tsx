@@ -13,23 +13,33 @@ const Form = styled.div`
   }
 `;
 
-class CreateAndPizzOrder extends Component {
-  constructor() {
-    super();
+interface Props {
+  setOrder: Function;
+}
+
+interface State {
+  contentSchema: string;
+  chainName: string;
+  [key: string]: any;
+}
+
+export default class CreateAndPizzaOrderForm extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
       contentSchema: 'AndPizzaOrder',
-      chainName: '&pizza',
+      chainName: '&pizza'
     };
   }
 
-  updateState = event => {
+  updateState = (e: any) => {
     const { setOrder } = this.props;
-    const { target } = event;
+    const { target } = e;
     const { value } = target;
     const { name } = target;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
 
     setOrder(this.state);
@@ -38,44 +48,40 @@ class CreateAndPizzOrder extends Component {
   getSelected = () => {
     const { setOrder } = this.props;
     const selectedSauces = [].filter
-      .call(document.getElementsByName('sauce'), c => c.checked)
-      .map(c => c.value);
+      .call(document.getElementsByName('sauce'), (c: any) => c.checked)
+      .map((c: any) => c.value);
     const selectedCheeses = [].filter
-      .call(document.getElementsByName('cheese'), c => c.checked)
-      .map(c => c.value);
+      .call(document.getElementsByName('cheese'), (c: any) => c.checked)
+      .map((c: any) => c.value);
     const selectedVeggies = [].filter
-      .call(document.getElementsByName('veggie'), c => c.checked)
-      .map(c => c.value);
+      .call(document.getElementsByName('veggie'), (c: any) => c.checked)
+      .map((c: any) => c.value);
     const selectedProteins = [].filter
-      .call(document.getElementsByName('protein'), c => c.checked)
-      .map(c => c.value);
+      .call(document.getElementsByName('protein'), (c: any) => c.checked)
+      .map((c: any) => c.value);
     const selectedFinishes = [].filter
-      .call(document.getElementsByName('finish'), c => c.checked)
-      .map(c => c.value);
+      .call(document.getElementsByName('finish'), (c: any) => c.checked)
+      .map((c: any) => c.value);
     this.setState({
       sauce: selectedSauces,
       cheese: selectedCheeses,
       veggies: selectedVeggies,
       proteins: selectedProteins,
-      finishes: selectedFinishes,
+      finishes: selectedFinishes
     });
     setOrder(this.state);
   };
 
   submitOrder = async () => {
     const { setOrder } = this.props;
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      submitOrder: true,
+      submitOrder: true
     }));
     setOrder(this.state);
   };
 
   render() {
-    CreateAndPizzOrder.propTypes = {
-      setOrder: PropTypes.func,
-    };
-
     const sauces = ['Classic Tomato', 'Spicy Tomato', 'Garlic Ricotta', 'Mushroom Truffle', 'Basil Pesto'] // prettier-ignore
     const saucesSpans = sauces.map((sauce, i) => (
       <span className="checkbox-container">
@@ -205,5 +211,3 @@ class CreateAndPizzOrder extends Component {
     );
   }
 }
-
-export default CreateAndPizzOrder;

@@ -27,7 +27,7 @@ interface OrderState {
 }
 
 interface Props {
-  orderID: string;
+  orderID?: string;
   favoriteCount?: number;
   createdDate?: Date;
   key?: string | number;
@@ -210,7 +210,12 @@ export default class OrderContent extends Component<Props, State> {
               </div>
 
               {/* Where a user can take action on the order. */}
-              <ActionBar key={orderId} favoriteCount={favoriteCount} orderId={orderId} usersFavorited={usersFavorited} />
+              <ActionBar
+                key={orderId}
+                favoriteCount={favoriteCount}
+                orderId={orderId}
+                usersFavorited={usersFavorited}
+              />
             </OrderContentContainer>
           </div>
         </ModalContainer>

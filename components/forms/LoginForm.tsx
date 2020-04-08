@@ -15,9 +15,9 @@ interface Props {
   email?: string;
   password?: string;
   signIn: Function;
-  updateUser: Function;
+  setUser: Function;
   updateAction?: Function | any;
-  resetPassword: Function;
+  resetPassword?: Function | any;
 }
 
 interface State {
@@ -113,7 +113,7 @@ export default class LoginForm extends Component<Props, State> {
 
   onSubmit = async (e: any) => {
     e.preventDefault();
-    const { signIn, updateUser, updateAction } = this.props;
+    const { signIn, setUser, updateAction } = this.props;
     const { email, password } = this.state;
     const creds = { email, password };
 
@@ -142,7 +142,7 @@ export default class LoginForm extends Component<Props, State> {
             email: response.data.email,
             userId: response.data.userId
           };
-          updateUser(user);
+          setUser(user);
           if (window.location.pathname !== ('/login' || '/signup')) {
             updateAction('');
           }
@@ -169,7 +169,13 @@ export default class LoginForm extends Component<Props, State> {
             <div className="form-input-label">
               <span>Email</span>
             </div>
-            <input name="email" onChange={this.updateState} value={email || ''} type="text" placeholder="Enter your email" />
+            <input
+              name="email"
+              onChange={this.updateState}
+              value={email || ''}
+              type="text"
+              placeholder="Enter your email"
+            />
             <ErrorMessage message={formErrors.email} state={this.state} />
             <div className="form-input-label">
               <span>Password</span>
@@ -178,7 +184,13 @@ export default class LoginForm extends Component<Props, State> {
               </span>
             </div>
 
-            <input name="password" onChange={this.updateState} value={password || ''} type="password" placeholder="Enter your password" />
+            <input
+              name="password"
+              onChange={this.updateState}
+              value={password || ''}
+              type="password"
+              placeholder="Enter your password"
+            />
             <ErrorMessage message={formErrors.password} state={this.state} />
             <input name="submit" onClick={this.onSubmit} type="submit" value="Log In" />
             <span className="sign-up-now">

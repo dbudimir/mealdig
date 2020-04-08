@@ -1,8 +1,11 @@
+// Utilities
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Form from '../components/styles/CreateOrderForm';
+// Styles
+import Form from '../styles/CreateOrderForm';
 
+// Components
 import Layout from '../components/sitewide/Layout';
 import CreateChipotleOrder from '../components/forms/order-forms/chain-forms/CreateChipotleOrder';
 import CreateAndPizzOrder from '../components/forms/order-forms/chain-forms/CreateAndPizzaOrderForm';
@@ -19,46 +22,58 @@ const FormHeader = styled.h2`
   margin: 0 0 32px;
 `;
 
-class CreateOrder extends Component {
-  constructor() {
-    super();
+interface Props {}
+
+interface State {
+  chainName: string;
+  order: any;
+  user: any;
+  orderDetails: any;
+  orderSubmitted: boolean | string;
+}
+
+export default class CreateOrder extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
       chainName: '',
       order: {},
       user: {},
+      orderDetails: {},
+      orderSubmitted: ''
     };
   }
 
-  updateChain = chain => {
+  setChain = (chain: string) => {
     this.setState({
-      chainName: chain,
+      chainName: chain
     });
   };
 
-  updateOrder = order => {
+  setOrder = (order: any) => {
     this.setState({
-      order,
+      order
     });
   };
 
-  updateOrderDetails = orderDetails => {
-    this.setState(prevState => ({
+  setOrderDetails = (orderDetails: any) => {
+    this.setState((prevState) => ({
       ...prevState,
-      order: { ...prevState.order, ...orderDetails },
+      order: { ...prevState.order, ...orderDetails }
     }));
   };
 
-  updateUser = user => {
-    this.setState(prevState => ({
+  setUser = (user: any) => {
+    this.setState((prevState) => ({
       ...prevState,
-      user: { ...prevState.user, ...user },
+      user: { ...prevState.user, ...user }
     }));
   };
 
   toggleSubmitConfirmation = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      orderSubmitted: !prevState.orderSubmitted,
+      orderSubmitted: !prevState.orderSubmitted
     }));
   };
 
@@ -67,19 +82,16 @@ class CreateOrder extends Component {
 
     let orderForm;
     if (state.chainName === CHAIN_CHIPOTLE) {
-      orderForm = <CreateChipotleOrder setOrder={this.updateOrder} />;
+      orderForm = <CreateChipotleOrder setOrder={this.setOrder} />;
     }
     if (state.chainName === CHAIN_ANDPIZZA) {
-      orderForm = <CreateAndPizzOrder setOrder={this.updateOrder} />;
+      orderForm = <CreateAndPizzOrder setOrder={this.setOrder} />;
     }
 
     let submitOrder;
     if (state.chainName !== '') {
       submitOrder = (
-        <SubmitOrder
-          setOrderDetails={this.updateOrderDetails}
-          toggleSubmitConfirmation={this.toggleSubmitConfirmation}
-        />
+        <SubmitOrder setOrderDetails={this.setOrderDetails} toggleSubmitConfirmation={this.toggleSubmitConfirmation} />
       );
     }
 
@@ -89,7 +101,7 @@ class CreateOrder extends Component {
         <SubmitConfirmation
           orderState={this.state}
           toggleSubmitConfirmation={this.toggleSubmitConfirmation}
-          updateUser={this.updateUser}
+          setUser={this.setUser}
         />
       );
     }
@@ -99,7 +111,7 @@ class CreateOrder extends Component {
         <Layout />
         <Form>
           <FormHeader>Create Your Order</FormHeader>
-          <SelectChainForm setChain={this.updateChain} />
+          <SelectChainForm setChain={this.setChain} />
           {orderForm}
           {submitOrder}
           {submitConfirmation}
@@ -108,5 +120,3 @@ class CreateOrder extends Component {
     );
   }
 }
-
-export default CreateOrder;

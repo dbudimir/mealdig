@@ -11,16 +11,16 @@ const PageContainer = styled.div`
 `;
 
 interface Props {
-  updateUser: Function;
+  setUser: Function;
 }
 
-const Login = ({ updateUser = () => {} }, props: Props) => {
+const Login = ({ setUser = () => {} }, props: Props) => {
   const userStatus: any = useContext(UserContext);
 
   return (
     <PageContainer>
       <Layout />
-      <LoginFormContainer signIn={userStatus.signIn} updateUser={updateUser} />
+      <LoginFormContainer signIn={userStatus.signIn} setUser={setUser} />
     </PageContainer>
   );
 };

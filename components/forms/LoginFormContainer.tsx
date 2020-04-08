@@ -7,7 +7,7 @@ import ForgotPassword from './ForgotPassword';
 
 interface Props {
   signIn: Function;
-  updateUser: Function;
+  setUser: Function;
 }
 
 interface State {
@@ -30,12 +30,12 @@ export default class LoginFormContainer extends Component<Props, State> {
   };
 
   render() {
-    const { signIn, updateUser } = this.props;
+    const { signIn, setUser } = this.props;
     const { userForgotPassword } = this.state;
 
     if (userForgotPassword === true) {
       return <ForgotPassword />;
     }
-    return <LoginForm resetPassword={this.forgotPassword} signIn={signIn} updateUser={updateUser} />;
+    return <LoginForm resetPassword={this.forgotPassword} signIn={signIn} setUser={setUser} />;
   }
 }

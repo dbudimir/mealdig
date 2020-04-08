@@ -14,22 +14,22 @@ interface FormErrors {
 }
 
 interface Props {
-  password: string;
-  passwordConfirm: string;
-  formErrors: FormErrors;
-  passwordValid: boolean;
-  connfirmPasswordValid: boolean;
+  password?: string;
+  passwordConfirm?: string;
+  formErrors?: FormErrors;
+  passwordValid?: boolean;
+  connfirmPasswordValid?: boolean;
   signIn: Function;
-  updateUser: Function;
-  updateAction: Function;
+  setUser: Function;
+  updateAction?: Function | any;
 }
 
 interface State {
-  password: string;
+  password: string | undefined;
   passwordConfirm: string;
   formErrors: FormErrors;
   passwordValid: boolean;
-  connfirmPasswordValid: boolean;
+  confirmPasswordValid: boolean;
   [key: string]: any;
 }
 
@@ -38,6 +38,7 @@ export default class ResetPassword extends Component<Props, State> {
     super(props);
     this.state = {
       ...props,
+      password: '',
       passwordConfirm: '',
       formErrors: {
         password: '',
@@ -56,7 +57,7 @@ export default class ResetPassword extends Component<Props, State> {
   };
 
   onSubmit = (e: any) => {
-    const { signIn, updateUser, updateAction } = this.props;
+    const { signIn, setUser, updateAction } = this.props;
     const { password } = this.state;
     e.preventDefault();
 
@@ -76,7 +77,7 @@ export default class ResetPassword extends Component<Props, State> {
         email: response.data.email,
         userId: response.data.userId
       };
-      updateUser(user);
+      setUser(user);
       if (window.location.pathname !== '/reset-password') {
         updateAction('');
       }
@@ -151,7 +152,13 @@ export default class ResetPassword extends Component<Props, State> {
             <div className="form-input-label">
               <span>Create a New Password</span>
             </div>
-            <input name="password" onChange={this.updateState} value={password || ''} type="password" placeholder="Password" />
+            <input
+              name="password"
+              onChange={this.updateState}
+              value={password || ''}
+              type="password"
+              placeholder="Password"
+            />
             <ErrorMessage message={formErrors.password} state={this.state} />
             <div className="form-input-label">
               <span>Re-enter Your New Password</span>

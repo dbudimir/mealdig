@@ -85,7 +85,9 @@ export default class Search extends Component<Props, State> {
     const userInput = e.currentTarget.value;
 
     // Filter our suggestions that don't contain the user's input
-    const filteredSuggestions = suggestions.filter((suggestion) => suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1);
+    const filteredSuggestions = suggestions.filter(
+      (suggestion) => suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+    );
 
     // Update the user input and filtered suggestions, reset the active
     // suggestion and make sure the suggestions are shown
@@ -184,7 +186,10 @@ export default class Search extends Component<Props, State> {
           <div className="no-suggestions">
             <div className="copy">
               <h3>Oh no!</h3>
-              <span>We cant find any {userInput} custom meals. Be the first to submit your facorrite custom meal in this category.</span>
+              <span>
+                We cant find any {userInput} custom meals. Be the first to submit your facorrite custom meal in this
+                category.
+              </span>
             </div>
             <Link
               href={{
@@ -217,8 +222,8 @@ export default class Search extends Component<Props, State> {
             <div className="header-text">
               <h1>MEALdig</h1>
               <h2>
-                Discover new meals and custom orders at your favorite fast-casual dining spots. Select a chain and search for a meal type to
-                get started.
+                Discover new meals and custom orders at your favorite fast-casual dining spots. Select a chain and
+                search for a meal type to get started.
               </h2>
             </div>
             <div className="search-box-container">

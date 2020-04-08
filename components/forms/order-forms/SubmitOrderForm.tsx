@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Components
@@ -15,13 +14,25 @@ const Form = styled.div`
   }
 `;
 
-class SubmitOrder extends Component {
-  constructor() {
-    super();
-    this.state = {};
+interface Props {
+  setOrderDetails: Function;
+  toggleSubmitConfirmation: Function;
+}
+
+interface State {
+  order: any;
+}
+
+export default class SubmitOrderForm extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      ...props,
+      order: {}
+    };
   }
 
-  updateState = e => {
+  updateState = (e: any) => {
     const { target } = e;
     const { value } = target;
     const { name } = target;
@@ -29,8 +40,8 @@ class SubmitOrder extends Component {
     this.setState(
       {
         order: {
-          [name]: value,
-        },
+          [name]: value
+        }
       },
       () => {
         const { setOrderDetails } = this.props;
@@ -40,12 +51,12 @@ class SubmitOrder extends Component {
     );
   };
 
-  updateTags = newTags => {
+  updateTags = (newTags: string[]) => {
     this.setState(
       {
         order: {
-          tags: newTags,
-        },
+          tags: newTags
+        }
       },
       () => {
         const { setOrderDetails } = this.props;
@@ -56,39 +67,29 @@ class SubmitOrder extends Component {
   };
 
   render() {
-    SubmitOrder.propTypes = {
-      setOrderDetails: PropTypes.func,
-      toggleSubmitConfirmation: PropTypes.func,
-    };
-
     const { toggleSubmitConfirmation } = this.props;
+
     return (
       <div>
         <Form>
           <div className="submit-order">
             <h3>Add details...</h3>
-            <span className="field-label">
-              Name Your Order (ex. "The Belly Buster", "The Big Cheese")
-            </span>
-            <input
-              onChange={this.updateState}
-              className="text-input"
-              name="orderName"
-              placeholder="Name your order"
-            />
+            {/* Order Name */}
+            <span className="field-label">Name Your Order (ex. "The Belly Buster", "The Big Cheese")</span>
+            <input onChange={this.updateState} className="text-input" name="orderName" placeholder="Name your order" />
+            {/* Order Description */}
             <span className="field-label">Short Description</span>
-            <textarea
-              onChange={this.updateState}
-              className="text-input"
-              name="description"
-              rows="4"
-            />
+            <textarea onChange={this.updateState} className="text-input" name="description" rows={4} />
+            {/* Order Tags */}
             <span className="field-label">Add Tags</span>
             <span>Type in your tags and press enter to confirm.</span>
             <TagForm setTags={this.updateTags} />
             <br />
+            {/* Submit Order */}
             <button
-              onClick={toggleSubmitConfirmation}
+              onClick={() => {
+                toggleSubmitConfirmation();
+              }}
               className="button"
               name="submit"
               type="submit"
@@ -101,5 +102,3 @@ class SubmitOrder extends Component {
     );
   }
 }
-
-export default SubmitOrder;

@@ -155,7 +155,13 @@ export default class ForgotPassword extends Component<Props, State> {
             <div className="form-input-label">
               <span>Email</span>
             </div>
-            <input name="email" onChange={this.updateState} value={email || ''} type="text" placeholder="Enter your email" />
+            <input
+              name="email"
+              onChange={this.updateState}
+              value={email || ''}
+              type="text"
+              placeholder="Enter your email"
+            />
             <ErrorMessage message={formErrors.email} state={this.state} />
             <input name="submit" onClick={this.onSubmit} type="submit" value="Get Recovery Link" />
             <span className="sign-up-now">

@@ -20,7 +20,8 @@ interface Props {
   email?: string;
   password?: string;
   signIn: Function;
-  updateUser: Function;
+  setUser: Function;
+  updateAction?: Function;
 }
 
 interface State {
@@ -94,7 +95,7 @@ export default class SignupForm extends Component<Props, State> {
   onSubmit = async (e: any) => {
     e.preventDefault();
 
-    const { signIn, updateUser } = this.props;
+    const { signIn, setUser } = this.props;
     const { state } = this;
 
     axios
@@ -113,7 +114,7 @@ export default class SignupForm extends Component<Props, State> {
           email: response.data.email,
           userId: response.data._id
         };
-        updateUser(user);
+        setUser(user);
         console.log(window.location.pathname);
         //   if (window.location.pathname !== ('/login' || '/signup')) {
         //     this.props.updateAction('');
@@ -122,7 +123,15 @@ export default class SignupForm extends Component<Props, State> {
   };
 
   validateFields(fieldName: string, value: string) {
-    let { formErrors, password, userNameValid, emailValid, passwordValid, confirmPasswordValid, passwordConfirm } = this.state;
+    let {
+      formErrors,
+      password,
+      userNameValid,
+      emailValid,
+      passwordValid,
+      confirmPasswordValid,
+      passwordConfirm
+    } = this.state;
 
     switch (fieldName) {
       case 'userName':
@@ -189,7 +198,13 @@ export default class SignupForm extends Component<Props, State> {
             <div className="form-input-label">
               <span>User Name</span>
             </div>
-            <input name="userName" onChange={this.updateState} value={userName || ''} type="text" placeholder="Enter a username" />
+            <input
+              name="userName"
+              onChange={this.updateState}
+              value={userName || ''}
+              type="text"
+              placeholder="Enter a username"
+            />
             <ErrorMessage message={formErrors.userName} state={this.state} />
             {/* Email input */}
             <div className="form-input-label">
@@ -201,7 +216,13 @@ export default class SignupForm extends Component<Props, State> {
             <div className="form-input-label">
               <span>Create Password</span>
             </div>
-            <input name="password" onChange={this.updateState} value={password || ''} type="password" placeholder="Password" />
+            <input
+              name="password"
+              onChange={this.updateState}
+              value={password || ''}
+              type="password"
+              placeholder="Password"
+            />
             <ErrorMessage message={formErrors.password} state={this.state} />
             {/* Confirm password input */}
             <div className="form-input-label">
