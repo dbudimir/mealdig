@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 //Components
 import Nav from '../sitewide/navigation/Nav';
-import Feedback from '../sitewide/Feedback'
+import Feedback from '../sitewide/Feedback';
 
 const GlobalLayout = styled.div`
   position: sticky;
@@ -21,7 +21,7 @@ const Layout: React.FC = ({}) => {
   const signOut = (e: any) => {
     e.preventDefault();
     userStatus.signOut();
-  };	
+  };
 
   const updateFeedbackModal = () => {
     localStorage.setItem('feedBackPopUpSeen', 'true');
@@ -30,9 +30,9 @@ const Layout: React.FC = ({}) => {
   return (
     <GlobalLayout>
       <div className="navbar">
-			<Nav signOut={signOut} />
+        <Nav signOut={signOut} />
       </div>
-		<Feedback updateFeedbackModal={updateFeedbackModal} />
+      <Feedback updateFeedbackModal={updateFeedbackModal} />
     </GlobalLayout>
   );
 };

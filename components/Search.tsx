@@ -28,11 +28,11 @@ interface ErrorMessage {
 interface State {
   selectedChain: string | boolean;
   userInput: any;
-  [key: string]: any;
   filteredSuggestions: string[];
   activeSuggestion: number;
   showSuggestions: boolean;
   errorMessages: ErrorMessage;
+  [key: string]: any;
 }
 
 export default class Search extends Component<Props, State> {

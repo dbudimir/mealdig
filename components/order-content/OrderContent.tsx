@@ -28,9 +28,9 @@ interface OrderState {
 
 interface Props {
   orderID: string;
-  favoriteCount: number;
-  createdDate: Date;
-  key: string;
+  favoriteCount?: number;
+  createdDate?: Date;
+  key?: string | number;
   orderState?: OrderState;
 }
 
