@@ -36,7 +36,7 @@ export default class Index extends Component<Props, State> {
     });
 
     return (
-      <div>
+      <>
         <NextSeo
           title="MealDig | The custom food order database."
           description="Discover popular meals and custom food orders at your favorite fast-casual dining spots."
@@ -46,7 +46,7 @@ export default class Index extends Component<Props, State> {
         <ChainButtons chainNames={chainNames} />
         {chainRows}
         <Footer />
-      </div>
+      </>
     );
   }
 }

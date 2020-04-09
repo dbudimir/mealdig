@@ -15,7 +15,7 @@ import SearchRow from '../styles/Search';
 import ErrorMessageBar from './forms/ErrorMessageBar';
 
 interface Props {
-  suggestions: string[];
+  suggestions?: string[];
 }
 
 interface ErrorMessage {
@@ -27,8 +27,8 @@ interface ErrorMessage {
 
 interface State {
   selectedChain: string | boolean;
-  userInput: any;
-  filteredSuggestions: any;
+  userInput: string;
+  filteredSuggestions: string[];
   activeSuggestion: number;
   showSuggestions: boolean;
   errorMessages: ErrorMessage;
@@ -42,7 +42,8 @@ export default class Search extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      // suggestions: tagIndex, // All possible tags
+      ...props,
+      suggestions: tagIndex, // All possible tags
       activeSuggestion: 0, // The active selection's index
       filteredSuggestions: [], // The suggestions that match the user's input
       showSuggestions: false, // Whether or not the suggestion list is shown
@@ -81,7 +82,7 @@ export default class Search extends Component<Props, State> {
 
   // Event fired when the input value is changed
   searchTextInput = (e: any) => {
-    const { suggestions } = this.props;
+    const { suggestions } = this.state;
     const cleanSuggestons = suggestions.map((suggestion: any) => {
       return suggestion.replace('-', ' ');
     });
@@ -105,7 +106,6 @@ export default class Search extends Component<Props, State> {
   searchInteraction = (e: any) => {
     const { activeSuggestion, filteredSuggestions } = this.state;
     const clickedTag = e.currentTarget.innerText;
-    //  .replace(/ /g, '-');
 
     // User has typed in a search and clicked in the tag list
     if (e.currentTarget.tagName === 'LI') {
@@ -162,8 +162,8 @@ export default class Search extends Component<Props, State> {
     const { activeSuggestion, filteredSuggestions, showSuggestions, userInput, errorMessages } = this.state;
 
     let suggestionsListComponent;
-    let errorBarComponent;
     let noSuggestionsComponent;
+    let errorBarComponent;
 
     if (showSuggestions && userInput) {
       if (filteredSuggestions.length) {
@@ -223,7 +223,7 @@ export default class Search extends Component<Props, State> {
         <SearchRow>
           <div className="search-container">
             <div className="header-text">
-              <h1>MEALdig</h1>
+              <h1>Mealdig</h1>
               <h2>
                 Discover new meals and custom orders at your favorite fast-casual dining spots. Select a chain and
                 search for a meal type to get started.

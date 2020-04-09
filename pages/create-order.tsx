@@ -57,21 +57,21 @@ export default class CreateOrder extends Component<Props, State> {
   };
 
   setOrderDetails = (orderDetails: any) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       ...prevState,
       order: { ...prevState.order, ...orderDetails }
     }));
   };
 
   setUser = (user: any) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       ...prevState,
       user: { ...prevState.user, ...user }
     }));
   };
 
   toggleSubmitConfirmation = () => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       ...prevState,
       orderSubmitted: !prevState.orderSubmitted
     }));

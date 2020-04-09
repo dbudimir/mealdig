@@ -39,11 +39,11 @@ const NavBar = styled.div`
   a {
     text-decoration: none;
     color: #000000;
-    max-height: 38px;
+    max-height: 36px;
   }
 
   .icon-logo {
-    height: 38px;
+    height: 36px;
   }
 
   .search {

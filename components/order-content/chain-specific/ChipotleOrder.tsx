@@ -33,12 +33,12 @@ export default class ChipotleOrder extends Component<Props, State> {
       beans: props.orderState.beans,
       rice: props.orderState.rice,
       fillings: JSON.parse(
-        JSON.stringify(props.orderState.fillings, function (key, value) {
+        JSON.stringify(props.orderState.fillings, function(key, value) {
           return value == null ? [] : value;
         })
       ),
       toppings: JSON.parse(
-        JSON.stringify(props.orderState.toppings, function (key, value) {
+        JSON.stringify(props.orderState.toppings, function(key, value) {
           return value == null ? [] : value;
         })
       )
@@ -55,23 +55,24 @@ export default class ChipotleOrder extends Component<Props, State> {
   }
 
   render() {
-    const order = this.state;
+    const { mealType, tortilla, beans, rice, fillings, toppings } = this.state;
+
     return (
       <>
         <p>
-          Meal Type: <span>{order.mealType}</span>
+          Meal Type: <span>{mealType}</span>
         </p>
         <p>
-          Tortilla: <span>{order.tortilla}</span>
+          Tortilla: <span>{tortilla}</span>
         </p>
         <p>
-          Beans: <span>{order.beans}</span>
+          Beans: <span>{beans}</span>
         </p>
         <p>
-          Rice: <span>{order.rice}</span>
+          Rice: <span>{rice}</span>
         </p>
-        <p>Fillings: {order.fillings}</p>
-        <p>Toppings: {order.toppings}</p>
+        <p>Fillings: {fillings}</p>
+        <p>Toppings: {toppings}</p>
       </>
     );
   }

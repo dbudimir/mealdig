@@ -26,7 +26,8 @@ export default class CreateChipotleOrder extends Component<Props, State> {
     super(props);
     this.state = {
       contentSchema: 'ChipotleOrder',
-      chainName: 'Chipotle'
+      chainName: 'Chipotle',
+      mealType: ''
     };
   }
 
@@ -47,8 +48,12 @@ export default class CreateChipotleOrder extends Component<Props, State> {
   };
 
   getSelected = () => {
-    const selectedFillings = [].filter.call(document.getElementsByName('filling'), (c: any) => c.checked).map((c: any) => c.value);
-    const selectedToppings = [].filter.call(document.getElementsByName('topping'), (c: any) => c.checked).map((c: any) => c.value);
+    const selectedFillings = [].filter
+      .call(document.getElementsByName('filling'), (c: any) => c.checked)
+      .map((c: any) => c.value);
+    const selectedToppings = [].filter
+      .call(document.getElementsByName('topping'), (c: any) => c.checked)
+      .map((c: any) => c.value);
     this.setState(
       {
         fillings: selectedFillings,
@@ -63,7 +68,7 @@ export default class CreateChipotleOrder extends Component<Props, State> {
 
   submitOrder = () => {
     this.setState(
-      (prevState) => ({
+      prevState => ({
         ...prevState,
         submitOrder: true
       }),

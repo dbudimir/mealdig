@@ -135,7 +135,7 @@ const SubmitConfirmation = (props: Props) => {
     e.preventDefault();
     if (localStorage.length > 0) {
       const reqBody = { order: orderState.order, userId: localStorage.userId };
-      axios.post(`${process.env.api_key}/api/user-order/create/existing-user`, { ...reqBody }).then((response) => {
+      axios.post(`${process.env.api_key}/api/user-order/create/existing-user`, { ...reqBody }).then(response => {
         Router.push(`/user/${localStorage.username}`);
       });
     } else if (localStorage.length === 0) {
@@ -144,7 +144,7 @@ const SubmitConfirmation = (props: Props) => {
         .post(`${process.env.api_key}/api/user-order/create/order`, {
           ...reqBody
         })
-        .then((response) => {
+        .then(response => {
           Router.push(
             {
               pathname: `/orders/${response.data._id}`,
@@ -226,7 +226,7 @@ const SubmitConfirmation = (props: Props) => {
           <span
             className="back-button"
             onClick={() => {
-              toggleSubmitConfirmation;
+              toggleSubmitConfirmation();
             }}
           >
             {'<< Go Back'}
