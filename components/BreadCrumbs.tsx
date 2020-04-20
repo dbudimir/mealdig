@@ -12,7 +12,7 @@ const size = {
 const BreadCrumbsContainer = styled.div`
   background-color: #9883e5;
   position: sticky;
-  top: 54px;
+  top: 52px;
   z-index: 10;
 
   .breadcrumbs-list {

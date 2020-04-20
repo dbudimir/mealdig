@@ -25,7 +25,7 @@ export default class ChainContent extends Component<Props, State> {
     let chainOrderContent;
     if (chainName === 'Chipotle') {
       chainOrderContent = <ChipotleOrder orderState={orderState} />;
-    } else if (chainName === '&pizza') {
+    } else if (chainName === '&pizza' || chainName === 'andPizza') {
       chainOrderContent = <AndPizzaOrder orderState={orderState} />;
     }
     return <>{chainOrderContent}</>;

@@ -70,10 +70,10 @@ export default class SubmitOrderForm extends Component<Props, State> {
     const { toggleSubmitConfirmation } = this.props;
 
     return (
-      <div>
-        <Form>
-          <div className="submit-order">
-            <h3>Add details...</h3>
+      <Form className="create-order-section">
+        <div className="submit-order">
+          <h3>Add details...</h3>
+          <form>
             {/* Order Name */}
             <span className="field-label">Name Your Order (ex. "The Belly Buster", "The Big Cheese")</span>
             <input onChange={this.updateState} className="text-input" name="orderName" placeholder="Name your order" />
@@ -96,9 +96,9 @@ export default class SubmitOrderForm extends Component<Props, State> {
             >
               Submit Order
             </button>
-          </div>
-        </Form>
-      </div>
+          </form>
+        </div>
+      </Form>
     );
   }
 }

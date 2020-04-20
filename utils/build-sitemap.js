@@ -23,6 +23,24 @@ let xml = '';
 xml += '<?xml version="1.0" encoding="UTF-8"?>';
 xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
+const makeTagPages = async () => {
+  uniqueAll.forEach(tag => {
+    totalPages++;
+    const cleanTag = tag[1].replace(' ', '-').toLowerCase();
+
+    const pagePath = `https://mealdig.com/${tag[0]}${cleanTag}`;
+
+    xml += '<url>';
+    xml += `<loc>${pagePath}</loc>`;
+    xml += '</url>';
+  });
+
+  xml += '</urlset>';
+
+  fs.writeFileSync(DESTINATION, xml);
+  console.log(`Wrote sitemap for ${totalPages} pages to ${DESTINATION}`);
+};
+
 const getTags = async () => {
   const res = await fetch('https://qsr-order-api.herokuapp.com/api/orders/');
   const data = await res.json();
@@ -44,24 +62,6 @@ const getTags = async () => {
 
   uniqueAll = uniqueTags.concat(uniqueChipotle, uniqueAndPizza);
   makeTagPages();
-};
-
-const makeTagPages = () => {
-  uniqueAll.forEach(tag => {
-    totalPages++;
-    const cleanTag = tag[1].replace(' ', '-').toLowerCase();
-
-    const pagePath = `https://mealdig.com/${tag[0]}${cleanTag}`;
-
-    xml += '<url>';
-    xml += `<loc>${pagePath}</loc>`;
-    xml += '</url>';
-  });
-
-  xml += '</urlset>';
-
-  fs.writeFileSync(DESTINATION, xml);
-  console.log(`Wrote sitemap for ${totalPages} pages to ${DESTINATION}`);
 };
 
 const makePages = async () => {

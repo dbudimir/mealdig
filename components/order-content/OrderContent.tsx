@@ -75,7 +75,7 @@ export default class OrderContent extends Component<Props, State> {
     if (orderState === undefined) {
       axios
         .get(`${process.env.api_key}/api/orders/id/${orderID}`)
-        .then((res) => {
+        .then(res => {
           const { data } = res;
           this.setState({
             orderId: data[0]._id,
@@ -91,7 +91,7 @@ export default class OrderContent extends Component<Props, State> {
             accessLevel: localStorage.accessLevel
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     } else {
@@ -100,7 +100,7 @@ export default class OrderContent extends Component<Props, State> {
         orderDescription: orderState.order.description,
         orderContent: orderState.order,
         tags: JSON.parse(
-          JSON.stringify(orderState.order.tags, function (key, value) {
+          JSON.stringify(orderState.order.tags, function(key, value) {
             return value == null ? [] : value;
           })
         ),
@@ -116,10 +116,10 @@ export default class OrderContent extends Component<Props, State> {
 
     axios
       .delete(`${process.env.api_key}/api/orders/delete/${orderID}`)
-      .then((res) => {
+      .then(res => {
         console.log('sucessfully deleted');
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -129,7 +129,7 @@ export default class OrderContent extends Component<Props, State> {
 
     window.history.pushState('object or string', 'Title', `/orders/${orderId}`);
     e.stopPropagation();
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       orderContentModal: !prevState.orderContentModal
     }));
   };
@@ -162,7 +162,7 @@ export default class OrderContent extends Component<Props, State> {
     return (
       <>
         {adminPanel}
-        <ModalContainer className="order-content-container-outer" onClick={(e) => this.closeOrderModal(e)}>
+        <ModalContainer className="order-content-container-outer" onClick={e => this.closeOrderModal(e)}>
           <div className={chainRowModalDisplay}>
             <OrderContentContainer className="order-content-container">
               <div className="title-bar">
@@ -192,13 +192,13 @@ export default class OrderContent extends Component<Props, State> {
                 <ChainLogo chainName={chainName} onClick={(e: any) => this.openOrderModal(e)} />
 
                 {/* Pulls in user enterted title and description */}
-                <div className="order-info" role="button" onClick={(e) => this.openOrderModal(e)}>
+                <div className="order-info" role="button" onClick={e => this.openOrderModal(e)}>
                   <h2 className="order-name">{orderName}</h2>
                   <p className="description">{orderDescription}</p>
                 </div>
 
                 {/* Pulls in conntent specific to this chain */}
-                <div className="order-content" role="button" onClick={(e) => this.openOrderModal(e)}>
+                <div className="order-content" role="button" onClick={e => this.openOrderModal(e)}>
                   <ChainContent chainName={chainName} orderState={orderContent} />
                 </div>
 

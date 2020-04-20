@@ -139,7 +139,7 @@ export default class CreateChipotleOrder extends Component<Props, State> {
     ));
 
     return (
-      <Form>
+      <Form className="create-order-section">
         <div className="customize">
           <h3>Customize your order...</h3>
           <form>
@@ -182,7 +182,7 @@ export default class CreateChipotleOrder extends Component<Props, State> {
             <div className="select-container">
               <select onChange={this.updateState} className="text-input" name="rice">
                 <option value="" disabled selected>
-                  Select rice
+                  Select Rice
                 </option>
                 <option value="White Rice">White Rice</option>
                 <option value="Brown Rice">Brown Rice</option>
@@ -210,7 +210,7 @@ export default class CreateChipotleOrder extends Component<Props, State> {
             <div className="select-container">
               <select onChange={this.updateState} className="text-input" name="beans">
                 <option value="" disabled selected>
-                  Select beans
+                  Select Beans
                 </option>
                 <option value="Black Beans">Black Beans</option>
                 <option value="Pinto Beans">Pinto Beans</option>
@@ -239,7 +239,6 @@ export default class CreateChipotleOrder extends Component<Props, State> {
               {toppingsSpans}
             </div>
           </form>
-          <br></br>
         </div>
       </Form>
     );

@@ -25,9 +25,9 @@ export default class SelectChainForm extends Component<Props, State> {
 
   render() {
     return (
-      <div className="select-chain">
+      <div className="select-chain create-order-section">
+        <h3>Select a restaurant...</h3>
         <form>
-          <h3>Select a restaurant...</h3>
           <div className="select-container">
             <select onChange={this.updateState} className="text-input" name="chainName">
               <option value="" disabled selected>

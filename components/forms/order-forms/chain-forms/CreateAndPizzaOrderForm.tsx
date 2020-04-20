@@ -74,7 +74,7 @@ export default class CreateAndPizzaOrderForm extends Component<Props, State> {
 
   submitOrder = async () => {
     const { setOrder } = this.props;
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       ...prevState,
       submitOrder: true
     }));

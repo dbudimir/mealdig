@@ -26,6 +26,8 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"pages/embed-window.js",
-		"**/*.tsx"
+		"**/*.tsx",
+		"utils/build-sitemap.tjs",
+		"utils/build-sitemap.js"
 	]
 }

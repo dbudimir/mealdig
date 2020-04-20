@@ -1,4 +1,15 @@
-import React, { Component } from 'react';
+import React, { createRef, Component } from 'react';
+import styled from 'styled-components';
+
+const ChipotleOrderContainer = styled.div`
+  .list-item {
+    display: block;
+  }
+
+  .list-item.hide {
+    display: none;
+  }
+`;
 
 interface OrderState {
   mealType: string;
@@ -6,74 +17,62 @@ interface OrderState {
   cheese: string;
   beans: string;
   rice: string;
-  fillings: string;
-  toppings: string;
+  fillings: string[] | any;
+  toppings: string[];
 }
 
 interface Props {
   orderState: OrderState;
 }
 
-interface State {
-  mealType: string | any;
-  tortilla: string | any;
-  beans: string | any;
-  rice: string | any;
-  fillings: string | any;
-  toppings: string | any;
-}
+interface State {}
 
 export default class ChipotleOrder extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      ...props,
-      mealType: props.orderState.mealType,
-      tortilla: props.orderState.tortilla,
-      beans: props.orderState.beans,
-      rice: props.orderState.rice,
-      fillings: JSON.parse(
-        JSON.stringify(props.orderState.fillings, function(key, value) {
-          return value == null ? [] : value;
-        })
-      ),
-      toppings: JSON.parse(
-        JSON.stringify(props.orderState.toppings, function(key, value) {
-          return value == null ? [] : value;
-        })
-      )
+      ...props
     };
   }
 
-  componentDidMount() {
-    const { fillings, toppings } = this.state;
-
-    this.setState({
-      fillings: fillings.map((filling: any, index: number) => <span key={`filling-${index}`}>{filling}</span>),
-      toppings: toppings.map((topping: any, index: number) => <span key={`topping-${index}`}>{topping}</span>)
-    });
-  }
-
   render() {
-    const { mealType, tortilla, beans, rice, fillings, toppings } = this.state;
+    const { mealType, tortilla, beans, rice, fillings, toppings } = this.props.orderState;
+    let fillingsBool: boolean = fillings !== undefined && fillings.length > 0;
+    let toppingsBool: boolean = toppings !== undefined && toppings.length > 0;
 
     return (
-      <>
-        <p>
+      <ChipotleOrderContainer>
+        {/*  */}
+        <p className={mealType === undefined ? 'list-item hide' : 'list-item'}>
           Meal Type: <span>{mealType}</span>
         </p>
-        <p>
+        {/*  */}
+        <p className={tortilla === undefined ? 'list-item hide' : 'list-item'}>
           Tortilla: <span>{tortilla}</span>
         </p>
-        <p>
+        {/*  */}
+        <p className={beans === undefined ? 'list-item hide' : 'list-item'}>
           Beans: <span>{beans}</span>
         </p>
-        <p>
+        {/*  */}
+        <p className={rice === undefined ? 'list-item hide' : 'list-item'}>
           Rice: <span>{rice}</span>
         </p>
-        <p>Fillings: {fillings}</p>
-        <p>Toppings: {toppings}</p>
-      </>
+        {/*  */}
+        <p className={fillingsBool ? 'list-item' : 'list-item hide'}>
+          Fillings:{' '}
+          {fillings === undefined
+            ? ''
+            : fillings.map((filling: any, index: number) => <span key={`filling-${index}`}>{filling}</span>)}
+        </p>
+        {/*  */}
+        <p className={toppingsBool ? 'list-item' : 'list-item hide'}>
+          Toppings:{' '}
+          {toppings === undefined
+            ? ''
+            : toppings.map((topping: any, index: number) => <span key={`topping-${index}`}>{topping}</span>)}
+        </p>
+      </ChipotleOrderContainer>
     );
   }
 }
