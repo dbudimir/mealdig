@@ -9,10 +9,9 @@ import { TwitterShareButton, TwitterIcon, EmailIcon } from 'react-share';
 
 // Styles
 import FeedbackIconContainer from '../../styles/Feedback';
-import { StringifyOptions } from 'querystring';
 
 interface Props {
-  updateFeedbackModal: Function;
+  updateFeedbackModal: () => void;
 }
 
 interface State {
@@ -40,7 +39,7 @@ export default class Feedback extends Component<Props, State> {
       feedbackIcon: <></>,
       email: '',
       emailMessage: '',
-      pageURL: ''
+      pageURL: '',
     };
   }
 
@@ -55,7 +54,7 @@ export default class Feedback extends Component<Props, State> {
 
     this.setState({
       pageURL: window.location.href,
-      feedbackDisplay: showFeedback
+      feedbackDisplay: showFeedback,
     });
   };
 
@@ -65,24 +64,24 @@ export default class Feedback extends Component<Props, State> {
     const { name } = target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
   sendFeedbackEmail = () => {
     this.setState(
       {
-        pageURL: window.location.href
+        pageURL: window.location.href,
       },
       () => {
         axios
           .post(`${process.env.api_key}/api/email/send-feedback`, {
-            ...this.state
+            ...this.state,
           })
           .then((response) => {
             if (response.status === 200) {
               this.setState({
-                emailInputDisplay: 'success'
+                emailInputDisplay: 'success',
               });
             }
             console.log(response.status);
@@ -95,7 +94,7 @@ export default class Feedback extends Component<Props, State> {
     this.setState((prevState) => ({
       emailInputDisplay: !prevState.emailInputDisplay,
       emailFeedbackClass:
-        prevState.emailInputClass === 'email-feedback active' ? 'email-feedback' : 'email-feedback active'
+        prevState.emailInputClass === 'email-feedback active' ? 'email-feedback' : 'email-feedback active',
     }));
   };
 
@@ -103,17 +102,17 @@ export default class Feedback extends Component<Props, State> {
     const { updateFeedbackModal } = this.state;
     if (e.target.id === 'close-feedback-button') {
       this.setState({
-        feedbackDisplay: 'infoIcon'
+        feedbackDisplay: 'infoIcon',
       });
     } else if (e.target.id === 'open-feedback-ui') {
       this.setState({
-        feedbackDisplay: 'feedbackMessage'
+        feedbackDisplay: 'feedbackMessage',
       });
     } else {
       this.setState((prevState) => ({
         feedbackModalClass:
           prevState.feedbackModalClass === 'feedback-modal-open' ? 'feedback-modal-closed' : 'feedback-modal-open',
-        feedbackDisplay: 'feedbackUI'
+        feedbackDisplay: 'feedbackUI',
       }));
     }
     // Updates global state after the user interacts wit the pop up. The parent is "Layout"
@@ -187,7 +186,7 @@ export default class Feedback extends Component<Props, State> {
         feedbackIcon = (
           <>
             <div className="feedback-container" onClick={this.openFeedbackModal}>
-              <span>We're a brand new website. Click here to share your feedback at anytime.</span>
+              <span>We&apos;re a brand new website. Click here to share your feedback at anytime.</span>
               <img id="close-feedback-button" src="/static/icons/close.svg" alt="Share Feedback Icon" />
             </div>
           </>

@@ -34,7 +34,7 @@ export default class ChainLogo extends Component<Props, State> {
           }}
           as={{ pathname: `/chains/${lowerCaseChainName}` }}
         >
-          <a href={`/chains/${lowerCaseChainName}`}>{chainLogo}</a>
+          {chainLogo}
         </Link>
       </>
     );

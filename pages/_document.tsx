@@ -1,32 +1,40 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from 'next/document';
+import type { DocumentContext, DocumentInitialProps } from 'next/document';
+import Document from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-interface Props {
-  styleTags: object;
-}
-
 // Import styled components ServerStyleSheet
-export default class MyDocument extends Document<Props> {
-  static async getInitialProps(context: any) {
-    const { renderPage } = context;
-    // Step 1: Create an instance of ServerStyleSheet
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const sheet = new ServerStyleSheet();
-    // Step 2: Retrieve styles from components in the page
-    const page = renderPage((App: any) => (props: any) => sheet.collectStyles(<App {...props} />));
-    // Step 3: Extract the styles as <style> tags
-    const styleTags = sheet.getStyleElement();
-    // Step 4: Pass styleTags as a prop
-    return { ...page, styleTags };
+    const originalRenderPage = ctx.renderPage;
+
+    try {
+      // Step 2: Retrieve styles from components in the page
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
   }
 
-  state = {};
-
   render() {
-    const { styleTags } = this.props;
-
     return (
-      <>
+      <Html lang="en">
         <Head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -172,19 +180,16 @@ export default class MyDocument extends Document<Props> {
 						margin: 0;
 						background: #eeeef1;
 					}
-				 `
+				 `,
             }}
           />
           <meta name="google-site-verification" content="0tikEBJv6jfDzlVrMSFJmAOFrQCMM0c47FLBfIyeck4" />
-
-          {/* Step 5: Output the styles in the head  */}
-          {styleTags}
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </>
+      </Html>
     );
   }
 }

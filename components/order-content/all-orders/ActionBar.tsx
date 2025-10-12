@@ -36,7 +36,7 @@ export default class ActionBar extends Component<Props, State> {
       isLoggedInUserFavorite: null,
       orderName: '',
       chainName: '',
-      tags: []
+      tags: [],
     };
   }
 
@@ -47,7 +47,7 @@ export default class ActionBar extends Component<Props, State> {
         {
           favoritesClass: 'favorites svg-clicked',
           favoriteCount,
-          loggedInUserFavorite: true
+          loggedInUserFavorite: true,
         },
         () => {}
       );
@@ -61,7 +61,7 @@ export default class ActionBar extends Component<Props, State> {
       {
         favoritesClass: favoriteClass,
         loggedInUserFavorite: loggedInUserFavorite !== true,
-        favoriteCount: updateCount
+        favoriteCount: updateCount,
       },
       () => {}
     );
@@ -125,8 +125,7 @@ export default class ActionBar extends Component<Props, State> {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="feather feather-star"
-          >
+            className="feather feather-star">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
           </svg>
 
@@ -135,14 +134,10 @@ export default class ActionBar extends Component<Props, State> {
         <TwitterShareButton
           url={`https://mealdig.com/orders/${orderId}`}
           title={`Check out ${orderName} at ${chainName}. https://mealdig.com/orders/${orderId}`}
-          hashtags={tags}
-        >
+          hashtags={tags}>
           <TwitterIcon size={24} round />
         </TwitterShareButton>
-        <FacebookShareButton
-          url={`https://mealdig.com/orders/${orderId}`}
-          quote={`Check out ${orderName} at ${chainName}. https://mealdig.com/orders/${orderId}`}
-        >
+        <FacebookShareButton url={`https://mealdig.com/orders/${orderId}`}>
           <FacebookIcon size={24} round />
         </FacebookShareButton>
         <div title="Click to embed this order on your site." onClick={this.openEmbedWindow}>
@@ -156,8 +151,7 @@ export default class ActionBar extends Component<Props, State> {
                   stroke="#FFFFFF"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2.5"
-                >
+                  strokeWidth="2.5">
                   <polyline id="Path" points="12 12 18 6 12 0" />
                   <polyline id="Path" points="6 0 0 6 6 12" />
                 </g>
@@ -169,28 +163,24 @@ export default class ActionBar extends Component<Props, State> {
           <Link
             href={{
               pathname: '/orders/[id]',
-              query: { id: orderId }
+              query: { id: orderId },
             }}
-            as={{ pathname: `/orders/${orderId}` }}
-          >
-            <a href={`/orders/${orderId}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-external-link"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </a>
+            as={{ pathname: `/orders/${orderId}` }}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-external-link">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
           </Link>
         </div>
       </div>

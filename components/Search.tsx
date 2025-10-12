@@ -200,7 +200,7 @@ export default class Search extends Component<Props, State> {
               }}
               as={{ pathname: `/create-order` }}
             >
-              <a href="/create-order">Build Custom Meal</a>
+              Build Custom Meal
             </Link>
           </div>
         );

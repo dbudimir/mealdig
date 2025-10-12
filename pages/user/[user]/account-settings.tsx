@@ -132,9 +132,9 @@ export default class AccountSettings extends Component<Props, State> {
             }}
             as={{ pathname: `/user/${user.userName}` }}
           >
-            <a href={`/user/${user.userName}`}>
-              <div>See all {user.orders.length} orders</div>
-            </a>
+
+            <div>See all {user.orders.length} orders</div>
+
           </Link>
 
           <hr />

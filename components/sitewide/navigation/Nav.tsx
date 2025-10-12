@@ -12,7 +12,7 @@ import LoggedInNav from './LoggedInNav';
 import LoggedOutNav from './LoggedOutNav';
 
 interface Props {
-  signOut: Function;
+  signOut: () => void;
 }
 
 interface State {
@@ -24,7 +24,7 @@ export default class Nav extends Component<Props, State> {
     super(props);
     this.state = {
       ...props,
-      navItems: <LoggedOutNav />
+      navItems: <LoggedOutNav />,
     };
   }
 
@@ -41,7 +41,7 @@ export default class Nav extends Component<Props, State> {
       userLoggedIn = <LoggedOutNav />;
     }
     this.setState({
-      navItems: userLoggedIn
+      navItems: userLoggedIn,
     });
   };
 

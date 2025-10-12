@@ -1,33 +1,34 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"esnext"
-		],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-		"noImplicitAny": false,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve"
-	},
-	"exclude": [
-		"node_modules"
-	],
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"pages/embed-window.js",
-		"**/*.tsx",
-		"utils/build-sitemap.tjs",
-		"utils/build-sitemap.js"
-	]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "pages/embed-window.js",
+    "**/*.tsx",
+    "utils/build-sitemap.tjs",
+    "utils/build-sitemap.js",
+    ".next/types/**/*.ts"
+  ]
 }

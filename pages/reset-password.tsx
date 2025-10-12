@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Layout from '../components/sitewide/Layout';
@@ -12,10 +11,10 @@ const PageContainer = styled.div`
 `;
 
 interface Props {
-  setUser: Function;
+  setUser?: () => void;
 }
 
-const ResetPassword: React.FC<Props> = ({ setUser = () => {} }, props: Props) => {
+const ResetPassword: React.FC<Props> = ({ setUser = () => {} }) => {
   const userStatus: any | undefined = useContext(UserContext);
 
   return (

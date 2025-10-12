@@ -39,14 +39,14 @@ export default class LoginForm extends Component<Props, State> {
       password: '',
       formErrors: {
         email: '',
-        password: ''
+        password: '',
       },
       emailValid: false,
       passwordValid: false,
       credentialValidation: {
         emailMatch: true,
-        passwordMatch: true
-      }
+        passwordMatch: true,
+      },
     };
   }
 
@@ -55,7 +55,7 @@ export default class LoginForm extends Component<Props, State> {
 
     this.setState({
       email,
-      password
+      password,
     });
   };
 
@@ -66,7 +66,7 @@ export default class LoginForm extends Component<Props, State> {
 
     this.setState(
       {
-        [name]: value
+        [name]: value,
       },
       () => {
         this.validateFields(name, value);
@@ -94,7 +94,7 @@ export default class LoginForm extends Component<Props, State> {
       {
         formErrors,
         emailValid,
-        passwordValid
+        passwordValid,
       },
       this.validateAll
     );
@@ -102,7 +102,7 @@ export default class LoginForm extends Component<Props, State> {
 
   validateAll = () => {
     this.setState({
-      allValid: this.state.emailValid && this.state.passwordValid
+      allValid: this.state.emailValid && this.state.passwordValid,
     });
   };
 
@@ -119,20 +119,20 @@ export default class LoginForm extends Component<Props, State> {
 
     axios
       .post(`${process.env.api_key}/api/users/login`, {
-        ...creds
+        ...creds,
       })
       .then((response) => {
         if (response.data.passwordMatch === false) {
           this.setState({
             credentialValidation: {
-              passwordMatch: false
-            }
+              passwordMatch: false,
+            },
           });
         } else if (response.data.emailMatch === false) {
           this.setState({
             credentialValidation: {
-              emailMatch: false
-            }
+              emailMatch: false,
+            },
           });
         } else {
           signIn(response.data.userName, response.data.email, response.data.userId, response.data.accessLevel, true);
@@ -140,10 +140,10 @@ export default class LoginForm extends Component<Props, State> {
             userFullName: response.data.userFullName,
             userName: response.data.userName,
             email: response.data.email,
-            userId: response.data.userId
+            userId: response.data.userId,
           };
           setUser(user);
-          if (window.location.pathname !== ('/login' || '/signup')) {
+          if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
             updateAction('');
           }
         }

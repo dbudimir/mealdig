@@ -1,6 +1,5 @@
 // Utilities
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 // Styles
 import Form from '../styles/Submit';
@@ -18,6 +17,7 @@ import Footer from '../components/sitewide/Footer';
 const CHAIN_CHIPOTLE = 'Chipotle';
 const CHAIN_ANDPIZZA = '&pizza';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface Props {}
 
 interface State {
@@ -39,41 +39,41 @@ export default class CreateOrder extends Component<Props, State> {
       user: {},
       orderDetails: {},
       orderSubmitted: '',
-      showPreview: false
+      showPreview: false,
     };
   }
 
   setChain = (chain: string) => {
     this.setState({
       chainName: chain,
-      showPreview: true
+      showPreview: true,
     });
   };
 
   setOrder = (order: any) => {
     this.setState({
-      order
+      order,
     });
   };
 
   setOrderDetails = (orderDetails: any) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      order: { ...prevState.order, ...orderDetails }
+      order: { ...prevState.order, ...orderDetails },
     }));
   };
 
   setUser = (user: any) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      user: { ...prevState.user, ...user }
+      user: { ...prevState.user, ...user },
     }));
   };
 
   toggleSubmitConfirmation = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      orderSubmitted: !prevState.orderSubmitted
+      orderSubmitted: !prevState.orderSubmitted,
     }));
   };
 

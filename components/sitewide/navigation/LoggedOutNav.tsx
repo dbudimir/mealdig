@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface Props {}
 interface State {
   mobileMenuOpen: boolean;
@@ -11,7 +12,7 @@ export default class LoggedOutNav extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      mobileMenuOpen: false
+      mobileMenuOpen: false,
     };
   }
 
@@ -19,8 +20,8 @@ export default class LoggedOutNav extends Component<Props, State> {
     e.preventDefault();
     console.log('clicked open');
 
-    this.setState(prevState => ({
-      mobileMenuOpen: !prevState.mobileMenuOpen
+    this.setState((prevState) => ({
+      mobileMenuOpen: !prevState.mobileMenuOpen,
     }));
   };
 
@@ -31,23 +32,15 @@ export default class LoggedOutNav extends Component<Props, State> {
       <>
         <Link
           href={{
-            pathname: '/'
+            pathname: '/',
           }}
           as={{ pathname: '/' }}
-        >
-          <a className="logo" href="/">
-            <img
-              className="icon-logo"
-              src="../../../static/ui-resources/mealdig-icon-logo.png"
-              alt="Mealdig Icon Logo"
-            />
-            <h1>Mealdig</h1>
-          </a>
+          className="logo">
+          <img className="icon-logo" src="../../../static/ui-resources/mealdig-icon-logo.png" alt="Mealdig Icon Logo" />
+          <h1>Mealdig</h1>
         </Link>
-
         <div className="search"></div>
-
-        <div className={'mobile-menu-icon'} onClick={e => this.openMobileMenu(e)}>
+        <div className={'mobile-menu-icon'} onClick={(e) => this.openMobileMenu(e)}>
           <svg
             width="36"
             height="36"
@@ -56,51 +49,40 @@ export default class LoggedOutNav extends Component<Props, State> {
             stroke="currentColor"
             stroke-width="2.5"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+            stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </div>
-
         <div className={mobileMenuOpen ? 'menu open-logged-out' : 'menu'}>
           <Link
             href={{
               pathname: '/login',
-              query: { action: 'login' }
+              query: { action: 'login' },
             }}
-            as={{ pathname: `/login` }}
-          >
-            <a href="/login">
-              <span className="log-in">Log In</span>
-            </a>
+            as={{ pathname: `/login` }}>
+            <span className="log-in">Log In</span>
           </Link>
 
           <Link
             href={{
               pathname: '/signup',
-              query: { action: 'signup' }
+              query: { action: 'signup' },
             }}
-            as={{ pathname: `/signup` }}
-          >
-            <a href="/signup">
-              <span className="sign-up">Sign Up</span>
-            </a>
+            as={{ pathname: `/signup` }}>
+            <span className="sign-up">Sign Up</span>
           </Link>
 
           <Link
             href={{
-              pathname: '/create-order'
+              pathname: '/create-order',
             }}
-            as={{ pathname: `/create-order` }}
-          >
-            <a href="/create-order">
-              <span className="create-order">
-                Create Order
-                {/* <img src="/static/plus.svg" alt="Plus Icon" /> */}
-              </span>
-            </a>
+            as={{ pathname: `/create-order` }}>
+            <span className="create-order">
+              Create Order
+              {/* <img src="/static/plus.svg" alt="Plus Icon" /> */}
+            </span>
           </Link>
         </div>
       </>

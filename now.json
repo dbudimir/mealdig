@@ -1,10 +1,14 @@
 {
-  "version": 2,
-  "builds": [{ "src": "package.json", "use": "@now/next@2.3.9" }],
-  "build": {
-    "env": {
-      "api_key": "@api_key"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm run pre-build && pnpm run build",
+  "devCommand": "pnpm run dev",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/(.*)/",
+      "destination": "/$1",
+      "permanent": true
     }
-  },
-  "routes": [{ "src": "/(.*)/", "status": 301, "headers": { "Location": "/$1" } }]
+  ]
 }

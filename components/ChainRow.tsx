@@ -2,7 +2,6 @@
 
 // Utilities
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // Components
 import OrderContent from './order-content/OrderContent';
@@ -12,6 +11,7 @@ interface Props {
   chainRow: any;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface State {}
 
 export default class ChainRow extends Component<Props, State> {

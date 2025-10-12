@@ -6,7 +6,7 @@ import styled from 'styled-components';
 // Styles
 const size = {
   tablet: 'only screen and (max-width : 768px)',
-  phone: 'only screen and (max-width : 548px)'
+  phone: 'only screen and (max-width : 548px)',
 };
 
 const BreadCrumbsContainer = styled.div`
@@ -62,7 +62,7 @@ export default class BreadCrumbs extends Component<Props, State> {
       ...props,
       pageType: props.pageType,
       allOrders: props.allOrders,
-      tag: props.tag
+      tag: props.tag,
     };
   }
 
@@ -81,9 +81,8 @@ export default class BreadCrumbs extends Component<Props, State> {
         <>
           <Link
             href={{ pathname: '/chains/[name]', query: { chainName: allOrders.name } }}
-            as={{ pathname: `/chains/${allOrders.name}` }}
-          >
-            <a href={`/chains/${allOrders.name}`}>{allOrders.name} </a>
+            as={{ pathname: `/chains/${allOrders.name}` }}>
+            {allOrders.name}
           </Link>
           <span>→</span>
         </>
@@ -100,12 +99,8 @@ export default class BreadCrumbs extends Component<Props, State> {
     return (
       <BreadCrumbsContainer className="breadcrumbs-container">
         <div className="breadcrumbs-list">
-          <Link href={{ pathname: '/' }} as={{ pathname: `/` }}>
-            <>
-              <a href="/">Home</a>
-              <span>→</span>
-            </>
-          </Link>
+          <Link href="/">Home</Link>
+          <span>→</span>
           {chainCrumb}
           {tagCrumb}
         </div>

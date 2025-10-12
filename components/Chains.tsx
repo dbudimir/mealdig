@@ -106,13 +106,13 @@ export default class Chains extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      sortOrder: 'popular'
+      sortOrder: 'popular',
     };
   }
 
   sortOrders = (e: any) => {
     this.setState({
-      sortOrder: e.target.value
+      sortOrder: e.target.value,
     });
   };
 
@@ -128,18 +128,15 @@ export default class Chains extends Component<Props, State> {
           <Link
             href={{
               pathname: '/chains/[name]',
-              query: { lowerCaseChainName }
+              query: { lowerCaseChainName },
             }}
-            as={{ pathname: `/chains/${lowerCaseChainName}` }}
-          >
-            <a href={`/chains/${lowerCaseChainName}`}>
-              <h2 className="chain-name">{chainName}</h2>
-            </a>
+            as={{ pathname: `/chains/${lowerCaseChainName}` }}>
+            <h2 className="chain-name">{chainName}</h2>
           </Link>
           <SortOrder>
             <span>Sort by:</span>
             <div className="sort-select">
-              <select onChange={(e) => this.sortOrders(e)} name="sort-orders" ref="order-select">
+              <select onChange={(e) => this.sortOrders(e)} name="sort-orders">
                 <option value="popular">Most Popular</option>
                 <option value="recent">Most Recent</option>
                 <option value="oldest">Oldest</option>
@@ -154,8 +151,7 @@ export default class Chains extends Component<Props, State> {
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="feather feather-arrow-down"
-              >
+                className="feather feather-arrow-down">
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <polyline points="19 12 12 19 5 12" />s
               </svg>

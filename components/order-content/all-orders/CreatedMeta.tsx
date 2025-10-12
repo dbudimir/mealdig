@@ -30,9 +30,9 @@ export default class CreatedMeta extends Component<Props, State> {
             }}
             as={{ pathname: `/user/${orderUserName}` }}
           >
-            <a href={`/user/${orderUserName}`}>
-              <span>{orderUserName}</span>
-            </a>
+
+            <span>{orderUserName}</span>
+
           </Link>{' '}
           <span>{userData.length === 0 ? '' : <Moment fromNow>{dateCreated}</Moment>}</span>
         </p>

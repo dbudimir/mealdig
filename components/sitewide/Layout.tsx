@@ -18,8 +18,7 @@ const GlobalLayout = styled.div`
 const Layout: React.FC = ({}) => {
   const userStatus: any = useContext(UserContext);
 
-  const signOut = (e: any) => {
-    e.preventDefault();
+  const signOut = () => {
     userStatus.signOut();
   };
 

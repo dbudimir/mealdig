@@ -1,5 +1,5 @@
 // Utilities
-import React, { Component, ReactComponentElement } from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 
 interface Props {
@@ -7,13 +7,14 @@ interface Props {
   chainName: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface State {}
 
 export default class RightColumn extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      ...props
+      ...props,
     };
   }
 
@@ -40,15 +41,12 @@ export default class RightColumn extends Component<Props, State> {
       tagCTA = (
         <Link
           href={{
-            pathname: `/tags/[tag]`
+            pathname: `/tags/[tag]`,
           }}
-          as={{ pathname: `/tags/${tag}` }}
-        >
-          <a href={`/tags/${tag}`}>
-            <div className="more-tag-cta">
-              <span>See more popular {capitalTagName} custom orders at other restaurants.</span>
-            </div>
-          </a>
+          as={{ pathname: `/tags/${tag}` }}>
+          <div className="more-tag-cta">
+            <span>See more popular {capitalTagName} custom orders at other restaurants.</span>
+          </div>
         </Link>
       );
     }
@@ -58,16 +56,13 @@ export default class RightColumn extends Component<Props, State> {
         {tagCTA}
         <Link
           href={{
-            pathname: `/chains/[name]`
+            pathname: `/chains/[name]`,
           }}
-          as={{ pathname: `/chains/${chainName}` }}
-        >
-          <a href={`/chains/${chainName}`}>
-            <div className="more-chain-cta">
-              <span>See more popular custom meals at {chainNameLower}</span>
-              <img src={`/static/chain-logos/square/${chainName}-square-logo.png`} alt={`${chainName} Square Logo`} />
-            </div>
-          </a>
+          as={{ pathname: `/chains/${chainName}` }}>
+          <div className="more-chain-cta">
+            <span>See more popular custom meals at {chainNameLower}</span>
+            <img src={`/static/chain-logos/square/${chainName}-square-logo.png`} alt={`${chainName} Square Logo`} />
+          </div>
         </Link>
         <div className="signup-cta">
           <span className="cta-text">
@@ -75,23 +70,17 @@ export default class RightColumn extends Component<Props, State> {
           </span>
           <Link
             href={{
-              pathname: '/create-order'
+              pathname: '/create-order',
             }}
-            as={{ pathname: '/create-order' }}
-          >
-            <a href="/create-order">
-              <span className="create">Create Order</span>
-            </a>
+            as={{ pathname: '/create-order' }}>
+            <span className="create">Create Order</span>
           </Link>
           <Link
             href={{
-              pathname: '/signup'
+              pathname: '/signup',
             }}
-            as={{ pathname: '/signup' }}
-          >
-            <a href="/signup">
-              <span className="signup">Sign Up</span>
-            </a>
+            as={{ pathname: '/signup' }}>
+            <span className="signup">Sign Up</span>
           </Link>
         </div>
       </div>

@@ -24,9 +24,9 @@ export default class OrderTags extends Component<Props, State> {
         }}
         as={{ pathname: `/chains/${chainName.toLowerCase()}/${tag}` }}
       >
-        <a href={`/chains/${chainName.toLowerCase()}/${tag}`} key={`tag-${index}`}>
-          {tag.replace(/-/g, ' ')}
-        </a>
+
+        {tag.replace(/-/g, ' ')}
+
       </Link>
     ));
 

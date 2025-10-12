@@ -73,13 +73,13 @@ export default class AllOrders extends Component<Props, State> {
     this.state = {
       ...props,
       sortOrder: 'popular',
-      orders: props.orders
+      orders: props.orders,
     };
   }
 
   sortOrders = (e: any) => {
     this.setState({
-      sortOrder: e.target.value
+      sortOrder: e.target.value,
     });
   };
 
@@ -118,7 +118,7 @@ export default class AllOrders extends Component<Props, State> {
         <Header>
           <H1>Orders</H1>
           <SortOrder>
-            <select onChange={(e) => this.sortOrders(e)} name="sort-orders" ref="order-select">
+            <select onChange={(e) => this.sortOrders(e)} name="sort-orders">
               <option value="" disabled selected>
                 Sort by
               </option>
@@ -136,8 +136,7 @@ export default class AllOrders extends Component<Props, State> {
               strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="feather feather-arrow-down"
-            >
+              className="feather feather-arrow-down">
               <line x1="12" y1="5" x2="12" y2="19" />
               <polyline points="19 12 12 19 5 12" />
             </svg>
@@ -154,6 +153,6 @@ export async function getServerSideProps() {
   const res = await fetch(`${process.env.api_key}/api/orders/`);
   const data = await res.json();
   return {
-    props: { orders: data }
+    props: { orders: data },
   };
 }

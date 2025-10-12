@@ -31,6 +31,7 @@ interface Props {
   order: any;
   orderId: string;
 }
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface State {}
 
 export default class OrderById extends Component<Props, State> {
@@ -57,6 +58,6 @@ export async function getServerSideProps(context: any) {
   const data = await res.json();
 
   return {
-    props: { order: data, orderId: context.query.id }
+    props: { order: data, orderId: context.query.id },
   };
 }

@@ -32,7 +32,7 @@ export default class Index extends Component<Props, State> {
 
     // Start function that generates row for each chain
     const chainRows = chains.map((chain: any, chainsIndex: number) => {
-      return <Chains chain={chain} index={chainsIndex} />;
+      return <Chains key={chainsIndex} chain={chain} index={chainsIndex} />;
     });
 
     return (
@@ -61,7 +61,7 @@ export async function getServerSideProps() {
 
   const chainsList = [data.orders, data2.orders];
 
-  const cleanList = chainsList.map(chain =>
+  const cleanList = chainsList.map((chain) =>
     chain.filter(
       (order: any) =>
         order.orderName !== null &&
@@ -74,6 +74,6 @@ export async function getServerSideProps() {
   );
 
   return {
-    props: { chains: cleanList }
+    props: { chains: cleanList },
   };
 }

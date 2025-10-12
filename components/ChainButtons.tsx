@@ -8,7 +8,7 @@ import ChainLogo from './order-content/chain-specific/ChainLogo';
 // Styles
 const size = {
   tablet: 'only screen and (max-width : 768px)',
-  phone: 'only screen and (max-width : 548px)'
+  phone: 'only screen and (max-width : 548px)',
 };
 
 const ChainButtonContainer = styled.div`
@@ -68,15 +68,15 @@ export default class ChainButtons extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      ...props
+      ...props,
     };
   }
 
   render() {
     const { chainNames } = this.state;
 
-    const buttons = chainNames.map(chainName => (
-      <div className="chain-button">
+    const buttons = chainNames.map((chainName, index) => (
+      <div key={index} className="chain-button">
         <ChainLogo chainName={chainName} />
       </div>
     ));

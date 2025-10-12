@@ -167,7 +167,7 @@ export default class ForgotPassword extends Component<Props, State> {
             <span className="sign-up-now">
               Don't have an account?
               <Link href="/signup">
-                <a> Sign up now.</a>
+                 Sign up now.
               </Link>
             </span>
           </div>

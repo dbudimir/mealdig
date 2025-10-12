@@ -22,6 +22,7 @@ const FormHeader = styled.h2`
   margin: 0 0 32px;
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface Props {}
 
 interface State {
@@ -40,40 +41,40 @@ export default class CreateOrder extends Component<Props, State> {
       order: {},
       user: {},
       orderDetails: {},
-      orderSubmitted: ''
+      orderSubmitted: '',
     };
   }
 
   setChain = (chain: string) => {
     this.setState({
-      chainName: chain
+      chainName: chain,
     });
   };
 
   setOrder = (order: any) => {
     this.setState({
-      order
+      order,
     });
   };
 
   setOrderDetails = (orderDetails: any) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      order: { ...prevState.order, ...orderDetails }
+      order: { ...prevState.order, ...orderDetails },
     }));
   };
 
   setUser = (user: any) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      user: { ...prevState.user, ...user }
+      user: { ...prevState.user, ...user },
     }));
   };
 
   toggleSubmitConfirmation = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      orderSubmitted: !prevState.orderSubmitted
+      orderSubmitted: !prevState.orderSubmitted,
     }));
   };
 

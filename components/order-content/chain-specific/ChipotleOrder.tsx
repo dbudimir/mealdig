@@ -31,14 +31,14 @@ export default class ChipotleOrder extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      ...props
+      ...props,
     };
   }
 
   render() {
     const { mealType, tortilla, beans, rice, fillings, toppings } = this.props.orderState;
-    let fillingsBool: boolean = fillings !== undefined && fillings.length > 0;
-    let toppingsBool: boolean = toppings !== undefined && toppings.length > 0;
+    const fillingsBool: boolean = fillings !== undefined && fillings.length > 0;
+    const toppingsBool: boolean = toppings !== undefined && toppings.length > 0;
 
     return (
       <ChipotleOrderContainer>
