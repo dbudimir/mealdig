@@ -6,7 +6,6 @@ import OrderPreviewContainer from '../../styles/OrderPreviewContainer';
 // Components
 import ChainLogo from './chain-specific/ChainLogo';
 import ChainContent from './chain-specific/ChainContent';
-import OrderTags from './all-orders/OrderTags';
 
 interface Props {
   orderContent: any;
@@ -18,7 +17,7 @@ export default class OrderPreview extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      ...props
+      ...props,
     };
   }
 

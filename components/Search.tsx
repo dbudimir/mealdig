@@ -54,8 +54,8 @@ export default class Search extends Component<Props, State> {
         noInputError: false,
         noChainError: false,
         noTagError: false,
-        tagDoesNotExistError: false
-      }
+        tagDoesNotExistError: false,
+      },
     };
   }
 
@@ -98,7 +98,7 @@ export default class Search extends Component<Props, State> {
     this.setState({
       filteredSuggestions,
       showSuggestions: true,
-      userInput: e.currentTarget.value
+      userInput: e.currentTarget.value,
     });
   };
 
@@ -111,7 +111,7 @@ export default class Search extends Component<Props, State> {
     if (e.currentTarget.tagName === 'LI') {
       this.setState(
         {
-          userInput: clickedTag
+          userInput: clickedTag,
         },
         () => this.runSearch()
       );
@@ -119,12 +119,12 @@ export default class Search extends Component<Props, State> {
 
     // User pressed the enter key, update the input and close the suggestions
     else if (e.keyCode === 13) {
-      let tagSlug = filteredSuggestions[activeSuggestion].replace(/ /g, '-');
+      const tagSlug = filteredSuggestions[activeSuggestion].replace(/ /g, '-');
       this.setState(
         {
           activeSuggestion: 0,
           showSuggestions: false,
-          userInput: tagSlug
+          userInput: tagSlug,
         },
         () => this.runSearch()
       );
@@ -153,7 +153,7 @@ export default class Search extends Component<Props, State> {
       const { name } = target;
 
       this.setState({
-        [name]: value
+        [name]: value,
       });
     }
   };
@@ -196,10 +196,9 @@ export default class Search extends Component<Props, State> {
             </div>
             <Link
               href={{
-                pathname: '/create-order'
+                pathname: '/create-order',
               }}
-              as={{ pathname: `/create-order` }}
-            >
+              as={{ pathname: `/create-order` }}>
               Build Custom Meal
             </Link>
           </div>
@@ -248,8 +247,7 @@ export default class Search extends Component<Props, State> {
                   strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="feather feather-arrow-down"
-                >
+                  className="feather feather-arrow-down">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <polyline points="19 12 12 19 5 12"></polyline>
                 </svg>

@@ -12,6 +12,7 @@ import TagPage from '../../styles/TagPage';
 // Components
 import Layout from '../../components/sitewide/Layout';
 import OrderContent from '../../components/order-content/OrderContent';
+import { getBaseUrl } from '../../lib/api-helper';
 
 const OrderContainer = styled.div`
   display: flex;
@@ -30,7 +31,6 @@ interface Props {
 
 interface State {
   orders: any;
-  _id: string;
   tag: string;
 }
 
@@ -40,13 +40,12 @@ export default class Tag extends Component<Props, State> {
     this.state = {
       ...props,
       orders: props.orders,
-      _id: '',
-      tag: props.tag
+      tag: props.tag,
     };
   }
 
   render() {
-    const { orders, _id, tag } = this.state;
+    const { orders, tag } = this.state;
     const orderCard = orders.map((order: any, index: number) => <OrderContent orderID={order._id} key={index} />);
 
     return (
@@ -66,13 +65,14 @@ export default class Tag extends Component<Props, State> {
 }
 
 export async function getServerSideProps(context: any) {
-  const res = await fetch(`${process.env.api_key}/api/orders/tag/${context.query.tag}`);
+  const baseUrl = getBaseUrl();
+  const res = await fetch(`${baseUrl}/api/orders/tag/${context.query.tag}`);
   const data = await res.json();
 
   return {
     props: {
       orders: data,
-      tag: context.query.tag
-    }
+      tag: context.query.tag,
+    },
   };
 }

@@ -9,6 +9,7 @@ import Search from '../components/Search';
 import ChainButtons from '../components/ChainButtons';
 import Chains from '../components/Chains';
 import Footer from '../components/sitewide/Footer';
+import { getBaseUrl } from '../lib/api-helper';
 
 interface Props {
   chains: any;
@@ -53,13 +54,14 @@ export default class Index extends Component<Props, State> {
 
 // Serverside get props
 export async function getServerSideProps() {
-  const res = await fetch(`${process.env.api_key}/api/chains/Chipotle`);
+  const baseUrl = getBaseUrl();
+  const res = await fetch(`${baseUrl}/api/chains/Chipotle`);
   const data = await res.json();
 
-  const res2 = await fetch(`${process.env.api_key}/api/chains/&pizza`);
+  const res2 = await fetch(`${baseUrl}/api/chains/&pizza`);
   const data2 = await res2.json();
 
-  const chainsList = [data.orders, data2.orders];
+  const chainsList = [data?.orders || [], data2?.orders || []];
 
   const cleanList = chainsList.map((chain) =>
     chain.filter(

@@ -69,7 +69,7 @@ export default class ActionBar extends Component<Props, State> {
     const reqBody = { userId: localStorage.userId, orderId };
 
     axios
-      .post(process.env.api_key + apiURL, { ...reqBody })
+      .post(apiURL, { ...reqBody })
       .then((res) => {
         console.log(res);
       })

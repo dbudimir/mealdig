@@ -1,4 +1,4 @@
-import React, { createRef, Component } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const ChipotleOrderContainer = styled.div`
@@ -36,6 +36,10 @@ export default class ChipotleOrder extends Component<Props, State> {
   }
 
   render() {
+    if (!this.props.orderState) {
+      return <ChipotleOrderContainer>Loading...</ChipotleOrderContainer>;
+    }
+
     const { mealType, tortilla, beans, rice, fillings, toppings } = this.props.orderState;
     const fillingsBool: boolean = fillings !== undefined && fillings.length > 0;
     const toppingsBool: boolean = toppings !== undefined && toppings.length > 0;

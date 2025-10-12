@@ -14,6 +14,7 @@ import OrderContent from '../../components/order-content/OrderContent';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import RightColumn from '../../components/RightColumn';
 import Footer from '../../components/sitewide/Footer';
+import { getBaseUrl } from '../../lib/api-helper';
 
 interface Props {
   orders: object[];
@@ -31,7 +32,7 @@ export default class Chains extends Component<Props, State> {
     this.state = {
       ...props,
       orders: props.orders,
-      allOrders: props.allOrders
+      allOrders: props.allOrders,
     };
   }
 
@@ -51,7 +52,7 @@ export default class Chains extends Component<Props, State> {
             url: pageURL,
             title: `The Most Popular Custom meal orders at ${allOrders} | MealDig`,
             description: `Explore the Most Popular Custom meal orders at ${allOrders}, Or, submit your own custom order and share it with your friends.`,
-            site_name: 'MealDig'
+            site_name: 'MealDig',
           }}
         />
         <Layout />
@@ -77,8 +78,9 @@ export default class Chains extends Component<Props, State> {
 
 // Serverside get props
 export async function getServerSideProps(context: any) {
+  const baseUrl = getBaseUrl();
   const chainName = (await context.query.name.charAt(0).toUpperCase()) + context.query.name.slice(1);
-  const res = await fetch(`${process.env.api_key}/api/chains/${chainName}`);
+  const res = await fetch(`${baseUrl}/api/chains/${chainName}`);
   const data = await res.json();
 
   const chainsList = [data.orders];
@@ -98,7 +100,7 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       orders: cleanList[0],
-      allOrders: { name: context.query.name }
-    }
+      allOrders: { name: context.query.name },
+    },
   };
 }

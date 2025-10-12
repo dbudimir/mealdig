@@ -1,14 +1,15 @@
 require('isomorphic-fetch');
 const fs = require('fs');
+const path = require('path');
 
-module.exports.getTags = async function() {
+module.exports.getTags = async function () {
   const res = await fetch('https://qsr-order-api.herokuapp.com/api/orders/');
   const data = await res.json();
 
   let jointArray = [];
 
-  data.map(tag => {
-    const lowerTags = tag.tags.map(t => t.toLowerCase());
+  data.map((tag) => {
+    const lowerTags = tag.tags.map((t) => t.toLowerCase());
     jointArray = [...jointArray, ...lowerTags];
   });
 
@@ -20,8 +21,6 @@ module.exports.getTags = async function() {
   }, []);
   const tagIndex = JSON.stringify(uniqueArray);
 
-  fs.writeFileSync(
-    '/Users/davidbudimir/SEI/projects/mealdig/public/static/tag-index.json',
-    tagIndex
-  ); // default: 'utf8'
+  const tagIndexPath = path.join(__dirname, '../public/static/tag-index.json');
+  fs.writeFileSync(tagIndexPath, tagIndex); // default: 'utf8'
 };

@@ -42,17 +42,17 @@ export default class ResetPassword extends Component<Props, State> {
       passwordConfirm: '',
       formErrors: {
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
       },
       passwordValid: false,
-      confirmPasswordValid: false
+      confirmPasswordValid: false,
     };
   }
 
   componentDidMount = () => {
     const { password } = this.props;
     this.setState({
-      password
+      password,
     });
   };
 
@@ -66,16 +66,16 @@ export default class ResetPassword extends Component<Props, State> {
 
     const newPassword = {
       password,
-      token
+      token,
     };
 
-    axios.post(`${process.env.api_key}/api/email/confirm-token`, { newPassword }).then((response) => {
+    axios.post(`/api/email/confirm-token`, { newPassword }).then((response) => {
       signIn(response.data.userName, response.data.email, response.data.userId, true);
       const user = {
         userFullName: response.data.userFullName,
         userName: response.data.userName,
         email: response.data.email,
-        userId: response.data.userId
+        userId: response.data.userId,
       };
       setUser(user);
       if (window.location.pathname !== '/reset-password') {
@@ -86,8 +86,8 @@ export default class ResetPassword extends Component<Props, State> {
 
   confirmPasswordReset = (state: any) => {
     axios
-      .post(`${process.env.api_key}/api/email/send-confirm`, {
-        ...state
+      .post(`/api/email/send-confirm`, {
+        ...state,
       })
       .then((response) => {
         console.log(response);
@@ -101,7 +101,7 @@ export default class ResetPassword extends Component<Props, State> {
 
     this.setState(
       {
-        [name]: value
+        [name]: value,
       },
       () => {
         this.validateFields(name, value);
@@ -131,7 +131,7 @@ export default class ResetPassword extends Component<Props, State> {
     this.setState({
       formErrors,
       passwordValid,
-      confirmPasswordValid
+      confirmPasswordValid,
     });
   }
 

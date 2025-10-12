@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import Layout from '../../components/sitewide/Layout';
 import OrderContent from '../../components/order-content/OrderContent';
+import { getBaseUrl } from '../../lib/api-helper';
 
 const Header = styled.div`
   display: flex;
@@ -150,7 +151,8 @@ export default class AllOrders extends Component<Props, State> {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${process.env.api_key}/api/orders/`);
+  const baseUrl = getBaseUrl();
+  const res = await fetch(`${baseUrl}/api/orders/`);
   const data = await res.json();
   return {
     props: { orders: data },

@@ -40,12 +40,12 @@ export default class ForgotPassword extends Component<Props, State> {
       ...props,
       email: '',
       formErrors: {
-        email: ''
+        email: '',
       },
       emailValid: false,
       allValid: false,
       existingUser: true,
-      isLoggedIn: ''
+      isLoggedIn: '',
     };
   }
 
@@ -54,7 +54,7 @@ export default class ForgotPassword extends Component<Props, State> {
 
     this.setState({
       email,
-      isLoggedIn: false
+      isLoggedIn: false,
     });
   };
 
@@ -65,7 +65,7 @@ export default class ForgotPassword extends Component<Props, State> {
 
     this.setState(
       {
-        [name]: value
+        [name]: value,
       },
       () => {
         this.validateFields(name, value);
@@ -74,7 +74,8 @@ export default class ForgotPassword extends Component<Props, State> {
   };
 
   validateFields = (fieldName: string, value: string) => {
-    let { formErrors, emailValid } = this.state;
+    const { formErrors } = this.state;
+    let emailValid = this.state.emailValid;
 
     switch (fieldName) {
       case 'email':
@@ -88,7 +89,7 @@ export default class ForgotPassword extends Component<Props, State> {
     this.setState(
       {
         formErrors,
-        emailValid
+        emailValid,
       },
       this.validateAll
     );
@@ -97,14 +98,14 @@ export default class ForgotPassword extends Component<Props, State> {
   validateAll = () => {
     const { emailValid } = this.state;
     this.setState({
-      allValid: emailValid
+      allValid: emailValid,
     });
   };
 
   sendRecoveryEmail = (state: any) => {
     axios
-      .post(`${process.env.api_key}/api/email/send`, {
-        ...state
+      .post(`/api/email/send`, {
+        ...state,
       })
       .then((response) => {
         console.log(response);
@@ -115,14 +116,14 @@ export default class ForgotPassword extends Component<Props, State> {
     e.preventDefault();
     const { state } = this;
 
-    axios.post(`${process.env.api_key}/api/email/`, { ...state }).then((response) => {
+    axios.post(`/api/email/`, { ...state }).then((response) => {
       if (!response.data.message) {
-        response.data.location = process.env.api_key;
+        response.data.location = window.location.origin;
 
         this.sendRecoveryEmail(response);
       } else {
         this.setState({
-          existingUser: false
+          existingUser: false,
         });
       }
     });
@@ -166,9 +167,7 @@ export default class ForgotPassword extends Component<Props, State> {
             <input name="submit" onClick={this.onSubmit} type="submit" value="Get Recovery Link" />
             <span className="sign-up-now">
               Don't have an account?
-              <Link href="/signup">
-                 Sign up now.
-              </Link>
+              <Link href="/signup">Sign up now.</Link>
             </span>
           </div>
         </Form>

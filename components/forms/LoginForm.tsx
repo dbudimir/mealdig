@@ -75,7 +75,9 @@ export default class LoginForm extends Component<Props, State> {
   };
 
   validateFields = (fieldName: string, value: string) => {
-    let { formErrors, emailValid, passwordValid } = this.state;
+    const { formErrors } = this.state;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
 
     switch (fieldName) {
       case 'email':
@@ -118,7 +120,7 @@ export default class LoginForm extends Component<Props, State> {
     const creds = { email, password };
 
     axios
-      .post(`${process.env.api_key}/api/users/login`, {
+      .post(`/api/users/login`, {
         ...creds,
       })
       .then((response) => {

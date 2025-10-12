@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // Components
 import ChipotleOrder from './ChipotleOrder';
@@ -15,7 +14,7 @@ export default class ChainContent extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      ...props
+      ...props,
     };
   }
 

@@ -135,20 +135,20 @@ const SubmitConfirmation = (props: Props) => {
     e.preventDefault();
     if (localStorage.length > 0) {
       const reqBody = { order: orderState.order, userId: localStorage.userId };
-      axios.post(`${process.env.api_key}/api/user-order/create/existing-user`, { ...reqBody }).then(response => {
+      axios.post(`/api/user-order/create/existing-user`, { ...reqBody }).then(() => {
         Router.push(`/user/${localStorage.username}`);
       });
     } else if (localStorage.length === 0) {
       const reqBody = { order: orderState.order };
       axios
-        .post(`${process.env.api_key}/api/user-order/create/order`, {
-          ...reqBody
+        .post(`/api/user-order/create/order`, {
+          ...reqBody,
         })
-        .then(response => {
+        .then((response) => {
           Router.push(
             {
               pathname: `/orders/${response.data._id}`,
-              query: { id: response.data._id }
+              query: { id: response.data._id },
             },
             `/orders/${response.data._id}`
           );
@@ -227,8 +227,7 @@ const SubmitConfirmation = (props: Props) => {
             className="back-button"
             onClick={() => {
               toggleSubmitConfirmation();
-            }}
-          >
+            }}>
             {'<< Go Back'}
           </span>
         </div>

@@ -65,7 +65,7 @@ export default class OrderContent extends Component<Props, State> {
       orderName: '',
       chainName: '',
       createdAt: new Date(),
-      accessLevel: ''
+      accessLevel: '',
     };
   }
 
@@ -74,8 +74,8 @@ export default class OrderContent extends Component<Props, State> {
 
     if (orderState === undefined) {
       axios
-        .get(`${process.env.api_key}/api/orders/id/${orderID}`)
-        .then(res => {
+        .get(`/api/orders/id/${orderID}`)
+        .then((res) => {
           const { data } = res;
           this.setState({
             orderId: data[0]._id,
@@ -88,10 +88,10 @@ export default class OrderContent extends Component<Props, State> {
             chainName: data[0].chainName,
             createdAt: data[0].createdAt,
             userData: data[0].users,
-            accessLevel: localStorage.accessLevel
+            accessLevel: localStorage.accessLevel,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     } else {
@@ -100,13 +100,13 @@ export default class OrderContent extends Component<Props, State> {
         orderDescription: orderState.order.description,
         orderContent: orderState.order,
         tags: JSON.parse(
-          JSON.stringify(orderState.order.tags, function(key, value) {
+          JSON.stringify(orderState.order.tags, function (key, value) {
             return value == null ? [] : value;
           })
         ),
         orderName: orderState.order.orderName,
         chainName: orderState.chainName,
-        accessLevel: localStorage.accessLevel
+        accessLevel: localStorage.accessLevel,
       });
     }
   }
@@ -115,11 +115,11 @@ export default class OrderContent extends Component<Props, State> {
     const { orderID } = this.props;
 
     axios
-      .delete(`${process.env.api_key}/api/orders/delete/${orderID}`)
-      .then(res => {
+      .delete(`/api/orders/delete/${orderID}`)
+      .then(() => {
         console.log('sucessfully deleted');
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -129,8 +129,8 @@ export default class OrderContent extends Component<Props, State> {
 
     window.history.pushState('object or string', 'Title', `/orders/${orderId}`);
     e.stopPropagation();
-    this.setState(prevState => ({
-      orderContentModal: !prevState.orderContentModal
+    this.setState((prevState) => ({
+      orderContentModal: !prevState.orderContentModal,
     }));
   };
 
@@ -138,7 +138,7 @@ export default class OrderContent extends Component<Props, State> {
     window.history.pushState('object or string', 'Title', '/');
     e.stopPropagation();
     this.setState({
-      orderContentModal: false
+      orderContentModal: false,
     });
   };
 
@@ -162,7 +162,7 @@ export default class OrderContent extends Component<Props, State> {
     return (
       <>
         {adminPanel}
-        <ModalContainer className="order-content-container-outer" onClick={e => this.closeOrderModal(e)}>
+        <ModalContainer className="order-content-container-outer" onClick={(e) => this.closeOrderModal(e)}>
           <div className={chainRowModalDisplay}>
             <OrderContentContainer className="order-content-container">
               <div className="title-bar">
@@ -178,8 +178,7 @@ export default class OrderContent extends Component<Props, State> {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="feather feather-x-circle"
-                  >
+                    className="feather feather-x-circle">
                     <circle cx="12" cy="12" r="10" />
                     <line x1="15" y1="9" x2="9" y2="15" />
                     <line x1="9" y1="9" x2="15" y2="15" />
@@ -192,13 +191,13 @@ export default class OrderContent extends Component<Props, State> {
                 <ChainLogo chainName={chainName} onClick={(e: any) => this.openOrderModal(e)} />
 
                 {/* Pulls in user enterted title and description */}
-                <div className="order-info" role="button" onClick={e => this.openOrderModal(e)}>
+                <div className="order-info" role="button" onClick={(e) => this.openOrderModal(e)}>
                   <h2 className="order-name">{orderName}</h2>
                   <p className="description">{orderDescription}</p>
                 </div>
 
                 {/* Pulls in conntent specific to this chain */}
-                <div className="order-content" role="button" onClick={e => this.openOrderModal(e)}>
+                <div className="order-content" role="button" onClick={(e) => this.openOrderModal(e)}>
                   <ChainContent chainName={chainName} orderState={orderContent} />
                 </div>
 

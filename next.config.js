@@ -6,9 +6,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  env: {
-    api_key: process.env.api_key,
-  },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.

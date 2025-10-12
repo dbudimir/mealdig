@@ -12,6 +12,7 @@ import styled from 'styled-components';
 
 // Components
 import Layout from '../../../components/sitewide/Layout';
+import { getBaseUrl } from '../../../lib/api-helper';
 
 const AccountSettingsContainer = styled.div`
   max-width: 1024px;
@@ -73,7 +74,7 @@ export default class AccountSettings extends Component<Props, State> {
     const { name } = target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -82,8 +83,8 @@ export default class AccountSettings extends Component<Props, State> {
 
     if (e.keyCode === 13 || e.type === 'click') {
       axios
-        .post(`${process.env.api_key}/api/users/update-user`, {
-          ...reqBody
+        .post(`/api/users/update-user`, {
+          ...reqBody,
         })
         .then((response) => console.log(response));
     }
@@ -128,13 +129,10 @@ export default class AccountSettings extends Component<Props, State> {
           <Link
             href={{
               pathname: '/user/[user]',
-              query: { userId: user.userName }
+              query: { userId: user.userName },
             }}
-            as={{ pathname: `/user/${user.userName}` }}
-          >
-
+            as={{ pathname: `/user/${user.userName}` }}>
             <div>See all {user.orders.length} orders</div>
-
           </Link>
 
           <hr />
@@ -148,17 +146,18 @@ export default class AccountSettings extends Component<Props, State> {
 }
 
 export async function getServerSideProps(context: any) {
+  const baseUrl = getBaseUrl();
   let data;
   if (context.query.user.length === 24) {
-    const res = await fetch(`${process.env.api_key}/api/users/id/${context.query.user}`);
+    const res = await fetch(`${baseUrl}/api/users/id/${context.query.user}`);
     data = await res.json();
   } else {
-    const res = await fetch(`${process.env.api_key}/api/users/${context.query.user}`);
+    const res = await fetch(`${baseUrl}/api/users/${context.query.user}`);
     data = await res.json();
   }
 
   return {
     //  props: { data }
-    props: { data }
+    props: { data },
   };
 }

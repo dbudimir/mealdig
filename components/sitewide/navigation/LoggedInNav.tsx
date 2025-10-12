@@ -57,7 +57,7 @@ export default class LoggedInNav extends Component<Props, State> {
           }}
           as={{ pathname: '/' }}
           className="logo">
-          <img className="icon-logo" src="../../../static/ui-resources/mealdig-icon-logo.png" alt="Mealdig Icon Logo" />
+          <img className="icon-logo" src="/static/favicon.png" alt="Mealdig Icon Logo" />
           <h1>Mealdig</h1>
         </Link>
         <div className="search"></div>

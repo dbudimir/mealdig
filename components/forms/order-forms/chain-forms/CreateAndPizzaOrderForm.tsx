@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Form = styled.div`
@@ -28,7 +27,7 @@ export default class CreateAndPizzaOrderForm extends Component<Props, State> {
     super(props);
     this.state = {
       contentSchema: 'AndPizzaOrder',
-      chainName: '&pizza'
+      chainName: '&pizza',
     };
   }
 
@@ -39,7 +38,7 @@ export default class CreateAndPizzaOrderForm extends Component<Props, State> {
     const { name } = target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
 
     setOrder(this.state);
@@ -67,16 +66,16 @@ export default class CreateAndPizzaOrderForm extends Component<Props, State> {
       cheese: selectedCheeses,
       veggies: selectedVeggies,
       proteins: selectedProteins,
-      finishes: selectedFinishes
+      finishes: selectedFinishes,
     });
     setOrder(this.state);
   };
 
   submitOrder = async () => {
     const { setOrder } = this.props;
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      submitOrder: true
+      submitOrder: true,
     }));
     setOrder(this.state);
   };
@@ -171,8 +170,7 @@ export default class CreateAndPizzaOrderForm extends Component<Props, State> {
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="feather feather-arrow-down"
-                  >
+                    className="feather feather-arrow-down">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <polyline points="19 12 12 19 5 12"></polyline>
                   </svg>

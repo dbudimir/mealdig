@@ -11,6 +11,7 @@ import styled from 'styled-components';
 // Componnents
 import Layout from '../../components/sitewide/Layout';
 import OrderContent from '../../components/order-content/OrderContent';
+import { getBaseUrl } from '../../lib/api-helper';
 
 const H1 = styled.h1`
   max-width: 1024px;
@@ -53,7 +54,7 @@ export default class User extends Component<Props, State> {
       ...props,
       orders: {},
       orderId: '',
-      fullName: ''
+      fullName: '',
     };
   }
 
@@ -73,14 +74,15 @@ export default class User extends Component<Props, State> {
 }
 
 export async function getServerSideProps(context: any) {
-  const res = await fetch(`${process.env.api_key}/api/users/${context.query.user}`);
+  const baseUrl = getBaseUrl();
+  const res = await fetch(`${baseUrl}/api/users/${context.query.user}`);
   const data = await res.json();
 
   return {
     props: {
       orders: data[0].orders,
       fullName: data[0].userFullName,
-      userId: context.query.user
-    }
+      userId: context.query.user,
+    },
   };
 }

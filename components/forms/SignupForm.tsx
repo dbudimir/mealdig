@@ -55,14 +55,14 @@ export default class SignupForm extends Component<Props, State> {
         userName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
       },
       userNameValid: false,
       emailValid: false,
       passwordValid: false,
       confirmPasswordValid: false,
       allValid: false,
-      isLoggedIn: null
+      isLoggedIn: null,
     };
   }
 
@@ -73,7 +73,7 @@ export default class SignupForm extends Component<Props, State> {
       userName,
       email,
       password,
-      isLoggedIn: false
+      isLoggedIn: false,
     });
   };
 
@@ -84,7 +84,7 @@ export default class SignupForm extends Component<Props, State> {
 
     this.setState(
       {
-        [name]: value
+        [name]: value,
       },
       () => {
         this.validateFields(name, value);
@@ -99,20 +99,20 @@ export default class SignupForm extends Component<Props, State> {
     const { state } = this;
 
     axios
-      .post(`${process.env.api_key}/api/users/signup`, {
-        ...state
+      .post(`/api/users/signup`, {
+        ...state,
       })
       .then((response) => {
         this.setState({
           isLoggedIn: true,
-          userId: response.data._id
+          userId: response.data._id,
         });
         signIn(response.data.userName, response.data.email, response.data._id, true);
         const user = {
           userFullName: response.data.userFullName,
           userName: response.data.userName,
           email: response.data.email,
-          userId: response.data._id
+          userId: response.data._id,
         };
         setUser(user);
         console.log(window.location.pathname);
@@ -123,15 +123,13 @@ export default class SignupForm extends Component<Props, State> {
   };
 
   validateFields(fieldName: string, value: string) {
-    let {
-      formErrors,
-      password,
-      userNameValid,
-      emailValid,
-      passwordValid,
-      confirmPasswordValid,
-      passwordConfirm
-    } = this.state;
+    const { formErrors } = this.state;
+    const password = this.state.password;
+    const passwordConfirm = this.state.passwordConfirm;
+    let userNameValid = this.state.userNameValid;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
+    let confirmPasswordValid = this.state.confirmPasswordValid;
 
     switch (fieldName) {
       case 'userName':
@@ -160,7 +158,7 @@ export default class SignupForm extends Component<Props, State> {
         userNameValid,
         emailValid,
         passwordValid,
-        confirmPasswordValid
+        confirmPasswordValid,
       },
       this.validateAll
     );
@@ -170,7 +168,7 @@ export default class SignupForm extends Component<Props, State> {
     const { userNameValid, emailValid, passwordValid, confirmPasswordValid } = this.state;
 
     this.setState({
-      allValid: emailValid && passwordValid && confirmPasswordValid && userNameValid
+      allValid: emailValid && passwordValid && confirmPasswordValid && userNameValid,
     });
   }
 

@@ -75,7 +75,7 @@ export default class Feedback extends Component<Props, State> {
       },
       () => {
         axios
-          .post(`${process.env.api_key}/api/email/send-feedback`, {
+          .post(`/api/email/send-feedback`, {
             ...this.state,
           })
           .then((response) => {

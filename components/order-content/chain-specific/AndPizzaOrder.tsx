@@ -24,6 +24,19 @@ interface State {
 export default class AndPizzaOrder extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
+    if (!props.orderState) {
+      this.state = {
+        dough: '',
+        sauces: [],
+        cheeses: [],
+        finishes: [],
+        proteins: [],
+        veggies: [],
+      };
+      return;
+    }
+
     this.state = {
       ...props,
       dough: props.orderState.dough,
@@ -51,22 +64,30 @@ export default class AndPizzaOrder extends Component<Props, State> {
         JSON.stringify(props.orderState.veggies, function (key, value) {
           return value == null ? [] : value;
         })
-      )
+      ),
     };
   }
 
   componentDidMount() {
+    if (!this.props.orderState) {
+      return;
+    }
+
     const { sauces, cheeses, finishes, proteins, veggies } = this.state;
     this.setState({
       sauces: sauces.map((sauce: string, index: number) => <span key={`sauce-${index}`}>{sauce}</span>), // prettier-ignore
       cheeses: cheeses.map((cheese: string, index: number) => (<span key={`cheese-${index}`}>{cheese}</span>)), // prettier-ignore
       finishes: finishes.map((finish: string, index: number) => (<span key={`finish-${index}`}> {finish}</span>)), // prettier-ignore
       proteins: proteins.map((protein: string, index: number) => (<span key={`protein-${index}`}>{protein}</span>)), // prettier-ignore
-      veggies: veggies.map((veg: string, index: number) => <span key={`veg-${index}`}>{veg}</span>) // prettier-ignore
+      veggies: veggies.map((veg: string, index: number) => <span key={`veg-${index}`}>{veg}</span>), // prettier-ignore
     });
   }
 
   render() {
+    if (!this.props.orderState) {
+      return <div>Loading...</div>;
+    }
+
     const { dough, sauces, cheeses, finishes, proteins, veggies } = this.state;
     return (
       <>
